@@ -43,7 +43,7 @@ REQUIRED_LOCATORS = {
     "members",
     "body",
 }
-FIXTURES = Path(__file__).resolve().parents[2] / "Level1" / "Member2" / "fixtures"
+FIXTURES = Path(__file__).resolve().parents[2] / "Level1" / "Khieu" / "fixtures"
 
 
 def read_csv(path):

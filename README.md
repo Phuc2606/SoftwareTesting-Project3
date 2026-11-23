@@ -1,6 +1,6 @@
-# Member2 — Create Group in Moodle
+# Khieu — Create Group in Moodle
 
-Hai level chạy cùng 57 case `TC-002-001`–`TC-002-057` bằng Python 3, Selenium và `unittest`. Mỗi level có runner ngay trong `automation.py`. Cả hai dùng bộ ảnh và file upload tại `Level1/Member2/fixtures/`, nên giữ nguyên đường dẫn này khi đóng gói. Bốn fixture được trích nguyên byte từ suite Katalon của Project 2.
+Hai level chạy cùng 57 case `TC-002-001`–`TC-002-057` bằng Python 3, Selenium và `unittest`. Mỗi level có runner ngay trong `automation.py`. Cả hai dùng bộ ảnh và file upload tại `Level1/Khieu/fixtures/`, nên giữ nguyên đường dẫn này khi đóng gói. Bốn fixture được trích nguyên byte từ suite Katalon của Project 2.
 
 ## Chạy trên PowerShell
 
@@ -11,11 +11,11 @@ python -m pip install -r requirements.txt
 $env:MOODLE_USERNAME = Read-Host 'Moodle username'
 $env:MOODLE_PASSWORD = Read-Host 'Moodle password' -MaskInput
 $env:MOODLE_COURSE_ID = Read-Host 'Dedicated course ID'
-python Level1/Member2/automation.py --browser edge
-python Level2/Member2/automation.py --browser edge
+python Level1/Khieu/automation.py --browser edge
+python Level2/Khieu/automation.py --browser edge
 ```
 
-Địa chỉ mặc định là `http://localhost:8082`. Với Level 1 có thể đặt biến `MOODLE_BASE_URL`. Với Level 2, thay URL và locator trong `Level2/Member2/test_config.csv`. Có thể bỏ `--browser edge` nếu dùng Chrome. Dùng `--list` để kiểm tra danh sách case, `--case TC-002-001` để chạy riêng một case và `--headed` để xem trình duyệt chạy.
+Địa chỉ mặc định là `http://localhost:8082`. Với Level 1 có thể đặt biến `MOODLE_BASE_URL`. Với Level 2, thay URL và locator trong `Level2/Khieu/test_config.csv`. Có thể bỏ `--browser edge` nếu dùng Chrome. Dùng `--list` để kiểm tra danh sách case, `--case TC-002-001` để chạy riêng một case và `--headed` để xem trình duyệt chạy.
 
 `TC-002-040`–`TC-002-042` giữ kỳ vọng lỗi DB từ Project 2. Nếu thông báo cũ không xuất hiện, kết quả sẽ báo `DB error not reproduced` cùng trạng thái quan sát được. Lỗi chuẩn bị môi trường hiện ở `setUpClass`, còn kiểm tra thất bại hiện theo ID case.
 
@@ -31,8 +31,8 @@ python Level2/Member2/automation.py --browser edge
 Dùng cùng tài khoản và ID khóa học như hai level trên, sau đó chạy:
 
 ```powershell
-python NonFunctional/Member2/performance_automation.py --browser edge
-python NonFunctional/Member2/keyboard_automation.py --browser edge
+python NonFunctional/Khieu/performance_automation.py --browser edge
+python NonFunctional/Khieu/keyboard_automation.py --browser edge
 ```
 
 | ID | Loại kiểm thử | Cách thực hiện và tiêu chí đạt |
