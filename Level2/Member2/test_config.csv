@@ -1,0 +1,36 @@
+key,type,value
+base_url,setting,http://localhost:8082
+login_path,setting,/login/index.php
+groups_path,setting,/group/index.php
+username,id,username
+password,id,password
+login,id,loginbtn
+groups,id,groups
+create,id,showcreateorphangroupform
+edit,id,showeditgroupsettingsform
+delete,css selector,"#deletegroup, #deletegroups, [name='action'][value='deletegroup']"
+confirm,css selector,form:has(input[name=confirm][value='1']) [type=submit]
+name,id,id_name
+idnumber,id,id_idnumber
+key,id,id_enrolmentkey
+key_edit,css selector,#fitem_id_enrolmentkey a[data-passwordunmask=edit]
+visibility,id,id_visibility
+show,id,id_participation
+messaging,id,id_enablemessaging
+submit,id,id_submitbutton
+cancel,id,id_cancel
+required,id,id_error_name
+key_error,id,id_error_enrolmentkey
+editor_frame,id,id_description_editor_ifr
+editor,id,tinymce
+description,id,id_description_editor
+picture,css selector,#fitem_id_currentpicture img
+picker,name,imagefilechoose
+upload_repo,xpath,"//*[contains(@class,'fp-repo-area')]//*[self::a or self::button][contains(normalize-space(.),'Upload a file')]"
+upload_input,css selector,input[name=repo_upload_file]
+upload_button,css selector,button.fp-upload-btn
+upload_error,css selector,".moodle-dialogue [role=alert], .fp-error, .moodle-dialogue .fp-dlg-text, .alert-danger, #id_error_imagefile"
+picker_close,css selector,.moodle-dialogue button[aria-label=Close]
+draft_file,css selector,#id_imagefile_fieldset .filepicker-filename
+members,css selector,#members option
+body,tag name,body
