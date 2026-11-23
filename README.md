@@ -17,14 +17,18 @@ python Level2/Khieu/automation.py --browser edge
 
 Địa chỉ mặc định là `http://localhost:8082`. Với Level 1 có thể đặt biến `MOODLE_BASE_URL`. Với Level 2, thay URL và locator trong `Level2/Khieu/test_config.csv`. Có thể bỏ `--browser edge` nếu dùng Chrome. Dùng `--list` để kiểm tra danh sách case, `--case TC-002-001` để chạy riêng một case và `--headed` để xem trình duyệt chạy.
 
-`TC-002-040`–`TC-002-042` giữ kỳ vọng lỗi DB từ Project 2. Nếu thông báo cũ không xuất hiện, kết quả sẽ báo `DB error not reproduced` cùng trạng thái quan sát được. Lỗi chuẩn bị môi trường hiện ở `setUpClass`, còn kiểm tra thất bại hiện theo ID case.
+Lỗi chuẩn bị môi trường hiện ở `setUpClass`, còn kiểm tra thất bại hiện theo ID case.
 
 ## Kết quả kiểm chứng trên Moodle 5.1.9
 
-Đã chạy toàn bộ 57 ca mỗi level trên Moodle qua Kiri bằng Edge. `TC-002-054` ban đầu gặp lỗi thao tác trình duyệt, sau khi sửa bước rời ô tên đã chạy lại và đạt ở cả hai level. Tổng hợp theo phiên bản runner đã sửa, mỗi level có 52 ca đạt và 5 ca khác với kỳ vọng của Project 2.
+Lần chạy với kỳ vọng Project 2 trên Moodle qua Kiri bằng Edge cho kết quả 52/57 ca đạt mỗi level, sau khi chạy lại ca `TC-002-054` với bước rời ô tên đã sửa. Năm ca còn lại khác với kỳ vọng Project 2.
 
-- `TC-002-038`–`TC-002-039` yêu cầu lưu khóa 1–2 ký tự. Site hiện bật chính sách mật khẩu nhóm và yêu cầu tối thiểu 8 ký tự.
-- `TC-002-040`–`TC-002-042` đều quan sát thấy `Error writing to database` và số nhóm không đổi. Moodle hiện dùng PostgreSQL và thông báo giao diện không khớp chuỗi lỗi cột `enrolmentkey` trong Project 2.
+Hai level giữ ID và đầu vào của năm ca này. Kết quả mong đợi trong CSV đã được cập nhật cho cấu hình Moodle local:
+
+- `TC-002-038`–`TC-002-039` kiểm tra Moodle báo yêu cầu tối thiểu 8 ký tự và không tạo nhóm. Project 2 mong lưu được khóa 1–2 ký tự.
+- `TC-002-040`–`TC-002-042` kiểm tra Moodle báo `Error writing to database` và không tạo nhóm. Project 2 mong chuỗi lỗi cụ thể cho cột `enrolmentkey`. Site hiện dùng PostgreSQL.
+
+Sau khi cập nhật kỳ vọng cho Moodle local, chạy lại toàn bộ bằng Edge cho kết quả **57/57 ca đạt ở mỗi level**.
 
 ## Kiểm thử phi chức năng của Member2
 

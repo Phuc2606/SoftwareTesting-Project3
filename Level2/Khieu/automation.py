@@ -336,13 +336,11 @@ def run(data_path, config_path):
             if expected_name:
                 self.addCleanup(self.cleanup_group, label)
             self.click("submit")
-            if flow == "db_error":
-                observed = self.visible("body").text
-                reproduced = row["expected_error"] in observed
+            if flow in {"key_policy", "db_error"}:
+                error = self.visible("key_error" if flow == "key_policy" else "body").text
+                self.assertIn(row["expected_error"], error)
                 self.driver.get(self.groups_url)
-                self.assertTrue(reproduced, f"DB error not reproduced; group_count_delta="
-                                f"{len(self.group_labels()) - len(before)}; page={observed[:250]!r}")
-                self.assertEqual(self.group_labels(), before)
+                self.assertEqual(self.group_labels(), before, "A rejected key must not create a group")
                 return
             if flow == "invalid_picture" and not self.shown("groups"):
                 observed = self.visible("body").text
