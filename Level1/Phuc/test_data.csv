@@ -1,0 +1,23 @@
+﻿test_case_id,test_case_name,group,quiz_name,time_limit_enabled,time_limit_minutes,grade_to_pass,attempts_allowed,action,expected_result
+TC-004-001,Create valid quiz,Valid,Quiz_Valid_01,false,,,,save,Quiz_Valid_01
+TC-004-002,Empty quiz name,Invalid Name,,,,,,save,You must supply a value here.
+TC-004-003,Whitespace quiz name,Invalid Name,     ,,,,,save,Required
+TC-004-004,Single character quiz name,Boundary Name,Q,,,,,save,Q
+TC-004-005,258-char A quiz name,Boundary Name,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,,,,,save,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+TC-004-006,255-char b quiz name,Boundary Name,bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,,,,,save,bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+TC-004-007,256-char b quiz name,Boundary Name,bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,,,,,save,bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+TC-004-008,Vietnamese and special chars quiz name,Special Chars,Kiểm tra Giữa kỳ @2026 #1!,,,,,save,Kiểm tra Giữa kỳ @2026 #1!
+TC-004-009,Leading and trailing spaces quiz name,Trimming, Quiz Trim Test ,,,,,save,Quiz Trim Test
+TC-004-010,Time limit enabled with blank/0 minutes,Timing,Quiz_Time_0,true,,,,save,Grading method: Highest grade
+TC-004-011,Time limit 1 minute,Timing,Quiz_Time_1,true,1,,,save,Time limit: 1 min
+TC-004-012,Time limit 45 minutes,Timing,Quiz_Time_45,true,45,,,save,Time limit: 45 mins
+TC-004-013,Negative time limit -5,Timing Invalid,Quiz_Time_Neg,true,-5,,,save,This duration cannot be negative.
+TC-004-014,Non-numeric time limit abc,Timing Invalid,Quiz_Time_Text,true,abc,,,save,Quiz_Time_Text
+TC-004-015,Grade to pass 0,Grade,Quiz_Grade_0,,,0,,save,Quiz_Grade_0
+TC-004-016,Grade to pass 5.5,Grade,Quiz_Grade_5_5,,,5.5,,save,Grade to pass: 5.50 out of 10.00
+TC-004-017,Grade to pass 10,Grade,Quiz_Grade_10,,,10,,save,Grade to pass: 10.00 out of 10.00
+TC-004-018,Grade to pass over max 10.01,Grade Invalid,Quiz_Grade_Over,,,10.01,,save,The grade to pass can not be greater than the maximum possible grade 10
+TC-004-019,Grade to pass negative -1,Grade Boundary,Quiz_Grade_Neg,,,-1,,save,Grade to pass: -1.00 out of 10.00
+TC-004-020,Attempts allowed 1,Attempts,Quiz_Attempt_1,,,,1,save,Attempts allowed: 1
+TC-004-021,Attempts allowed unlimited,Attempts,Quiz_Attempt_Unlim,,,,,save,Quiz_Attempt_Unlim
+TC-004-022,Cancel quiz creation,Cancel,Quiz_Cancel_Test,,,,,cancel,Quiz_Cancel_Test

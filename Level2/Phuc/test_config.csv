@@ -1,0 +1,15 @@
+item_type,key,by,value
+url,login_path,,/login/index.php
+url,add_quiz_path,,/course/modedit.php?add=quiz&type&course={course_id}&sectionid={section_id}&return=0&beforemod=0
+element,username,id,username
+element,password,id,password
+element,login,id,loginbtn
+element,name,id,id_name
+element,time_enabled,id,id_timelimit_enabled
+element,time_minutes,id,id_timelimit_number
+element,grade_to_pass,id,id_gradepass
+element,attempts,id,id_attempts
+element,save,id,id_submitbutton
+element,cancel,id,id_cancel
+element,body,tag name,body
+element,feedback_boundary,id,id_feedbackboundaries_0
