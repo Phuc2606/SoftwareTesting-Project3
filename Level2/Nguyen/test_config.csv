@@ -1,0 +1,44 @@
+﻿item_type,key,by,value
+url,login_path,,/login/index.php
+url,add_course_path,,/course/edit.php?category=0
+url,manage_path,,/course/management.php
+url,manage_search_path,,/course/management.php?search=
+url,course_list_path,,/course/
+element,btn_cancel,id,id_cancel
+element,btn_clear_category,xpath,"//span[starts-with(@id,'form_autocomplete_selection')]/span"
+element,btn_saveanddisplay,id,id_saveanddisplay
+element,chk_enddate_enabled,id,id_enddate_enabled
+element,editor_body,css selector,body
+element,err_category,id,id_error_category
+element,err_fullname,id,id_error_fullname
+element,err_idnumber,id,id_error_idnumber
+element,err_shortname,id,id_error_shortname
+element,fld_coursedisplay,id,id_coursedisplay
+element,fld_enablecompletion,id,id_enablecompletion
+element,fld_enddate_day,id,id_enddate_day
+element,fld_enddate_hour,id,id_enddate_hour
+element,fld_enddate_minute,id,id_enddate_minute
+element,fld_enddate_month,id,id_enddate_month
+element,fld_enddate_year,id,id_enddate_year
+element,fld_format,id,id_format
+element,fld_fullname,id,id_fullname
+element,fld_groupmode,id,id_groupmode
+element,fld_groupmodeforce,id,id_groupmodeforce
+element,fld_hiddensections,id,id_hiddensections
+element,fld_idnumber,id,id_idnumber
+element,fld_lang,id,id_lang
+element,fld_maxbytes,id,id_maxbytes
+element,fld_newsitems,id,id_newsitems
+element,fld_shortname,id,id_shortname
+element,fld_showactivitydates,id,id_showactivitydates
+element,fld_showcompletionconditions,id,id_showcompletionconditions
+element,fld_showgrades,id,id_showgrades
+element,fld_showreports,id,id_showreports
+element,fld_startdate_day,id,id_startdate_day
+element,fld_startdate_hour,id,id_startdate_hour
+element,fld_startdate_minute,id,id_startdate_minute
+element,fld_startdate_month,id,id_startdate_month
+element,fld_startdate_year,id,id_startdate_year
+element,fld_visible,id,id_visible
+element,lnk_category_1,link text,Category 1
+element,lnk_create_course,css selector,a[href*='course/edit.php']

@@ -1,0 +1,594 @@
+﻿test_case_id,test_case_name,step_no,keyword,target,value
+TC-005-001,Tạo course hợp lệ (đầy đủ trường),1,open,add_course_path,
+TC-005-001,Tạo course hợp lệ (đầy đủ trường),2,type,fld_fullname,Software Testing 101
+TC-005-001,Tạo course hợp lệ (đầy đủ trường),3,type,fld_shortname,ST101
+TC-005-001,Tạo course hợp lệ (đầy đủ trường),4,type,fld_idnumber,ID101
+TC-005-001,Tạo course hợp lệ (đầy đủ trường),5,clickAndWait,btn_saveanddisplay,
+TC-005-001,Tạo course hợp lệ (đầy đủ trường),6,verifyTextPresent,Software Testing 101,
+TC-005-002,Full name để trống,1,open,add_course_path,
+TC-005-002,Full name để trống,2,type,fld_shortname,FN-EMPTY
+TC-005-002,Full name để trống,3,clickAndWait,btn_saveanddisplay,
+TC-005-002,Full name để trống,4,verifyTextPresent,Required,
+TC-005-002,Full name để trống,5,verifyText,err_fullname,Missing full name
+TC-005-003,Full name 1 ký tự,1,open,add_course_path,
+TC-005-003,Full name 1 ký tự,2,type,fld_fullname,A
+TC-005-003,Full name 1 ký tự,3,type,fld_shortname,BF1
+TC-005-003,Full name 1 ký tự,4,clickAndWait,btn_saveanddisplay,
+TC-005-003,Full name 1 ký tự,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-004,Full name 2 ký tự,1,open,add_course_path,
+TC-005-004,Full name 2 ký tự,2,type,fld_fullname,AB
+TC-005-004,Full name 2 ký tự,3,type,fld_shortname,BF2
+TC-005-004,Full name 2 ký tự,4,clickAndWait,btn_saveanddisplay,
+TC-005-004,Full name 2 ký tự,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-005,Full name 1332 ký tự,1,open,add_course_path,
+TC-005-005,Full name 1332 ký tự,2,storeEval,'a'.repeat(1332),longname
+TC-005-005,Full name 1332 ký tự,3,type,fld_fullname,${longname}
+TC-005-005,Full name 1332 ký tự,4,type,fld_shortname,BF1332
+TC-005-005,Full name 1332 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-005,Full name 1332 ký tự,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-006,Full name 1333 ký tự,1,open,add_course_path,
+TC-005-006,Full name 1333 ký tự,2,storeEval,'a'.repeat(1333),longname
+TC-005-006,Full name 1333 ký tự,3,type,fld_fullname,${longname}
+TC-005-006,Full name 1333 ký tự,4,type,fld_shortname,BF1333
+TC-005-006,Full name 1333 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-006,Full name 1333 ký tự,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-007,Full name 1334 ký tự,1,open,add_course_path,
+TC-005-007,Full name 1334 ký tự,2,storeEval,'a'.repeat(1334),longname
+TC-005-007,Full name 1334 ký tự,3,type,fld_fullname,${longname}
+TC-005-007,Full name 1334 ký tự,4,type,fld_shortname,BF1334
+TC-005-007,Full name 1334 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-007,Full name 1334 ký tự,6,storeLocation,currentUrl,
+TC-005-007,Full name 1334 ký tự,7,echo,${currentUrl},
+TC-005-007,Full name 1334 ký tự,8,verifyLocation,glob:*course/edit.php*,
+TC-005-008,Full name chỉ gồm dấu cách,1,open,add_course_path,
+TC-005-008,Full name chỉ gồm dấu cách,2,storeEval,'   ',spaces
+TC-005-008,Full name chỉ gồm dấu cách,3,type,fld_fullname,${spaces}
+TC-005-008,Full name chỉ gồm dấu cách,4,type,fld_shortname,FN-SPACE
+TC-005-008,Full name chỉ gồm dấu cách,5,clickAndWait,btn_saveanddisplay,
+TC-005-008,Full name chỉ gồm dấu cách,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-008,Full name chỉ gồm dấu cách,7,storeLocation,currentUrl,
+TC-005-008,Full name chỉ gồm dấu cách,8,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-008,Full name chỉ gồm dấu cách,9,open,${editUrl},
+TC-005-008,Full name chỉ gồm dấu cách,10,verifyEval,document.getElementById('id_fullname').value.length,3
+TC-005-009,Full name có ký tự đặc biệt/tiếng Việt,1,open,add_course_path,
+TC-005-009,Full name có ký tự đặc biệt/tiếng Việt,2,type,fld_fullname,Kiểm thử phần mềm @#& 2026
+TC-005-009,Full name có ký tự đặc biệt/tiếng Việt,3,type,fld_shortname,FNSP
+TC-005-009,Full name có ký tự đặc biệt/tiếng Việt,4,clickAndWait,btn_saveanddisplay,
+TC-005-009,Full name có ký tự đặc biệt/tiếng Việt,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-010,Short name để trống,1,open,add_course_path,
+TC-005-010,Short name để trống,2,type,fld_fullname,SN empty test
+TC-005-010,Short name để trống,3,clickAndWait,btn_saveanddisplay,
+TC-005-010,Short name để trống,4,verifyText,err_shortname,Missing short name
+TC-005-011,Short name 1 ký tự,1,open,add_course_path,
+TC-005-011,Short name 1 ký tự,2,type,fld_fullname,SN length 1
+TC-005-011,Short name 1 ký tự,3,type,fld_shortname,s
+TC-005-011,Short name 1 ký tự,4,clickAndWait,btn_saveanddisplay,
+TC-005-011,Short name 1 ký tự,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-012,Short name 2 ký tự,1,open,add_course_path,
+TC-005-012,Short name 2 ký tự,2,type,fld_fullname,SN length 2
+TC-005-012,Short name 2 ký tự,3,type,fld_shortname,s2
+TC-005-012,Short name 2 ký tự,4,clickAndWait,btn_saveanddisplay,
+TC-005-012,Short name 2 ký tự,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-013,Short name 254 ký tự,1,open,add_course_path,
+TC-005-013,Short name 254 ký tự,2,storeEval,'x'.repeat(254),longshort
+TC-005-013,Short name 254 ký tự,3,type,fld_fullname,SN length 254
+TC-005-013,Short name 254 ký tự,4,type,fld_shortname,${longshort}
+TC-005-013,Short name 254 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-013,Short name 254 ký tự,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-014,Short name 255 ký tự,1,open,add_course_path,
+TC-005-014,Short name 255 ký tự,2,storeEval,'y'.repeat(255),longshort
+TC-005-014,Short name 255 ký tự,3,type,fld_fullname,SN length 255
+TC-005-014,Short name 255 ký tự,4,type,fld_shortname,${longshort}
+TC-005-014,Short name 255 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-014,Short name 255 ký tự,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-015,Short name 256 ký tự,1,open,add_course_path,
+TC-005-015,Short name 256 ký tự,2,storeEval,'z'.repeat(256),longshort
+TC-005-015,Short name 256 ký tự,3,type,fld_fullname,SN length 256
+TC-005-015,Short name 256 ký tự,4,type,fld_shortname,${longshort}
+TC-005-015,Short name 256 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-015,Short name 256 ký tự,6,verifyLocation,glob:*course/edit.php*,
+TC-005-016,Short name trùng course đã có,1,open,add_course_path,
+TC-005-016,Short name trùng course đã có,2,type,fld_fullname,Duplicate short name test
+TC-005-016,Short name trùng course đã có,3,type,fld_shortname,ST101
+TC-005-016,Short name trùng course đã có,4,clickAndWait,btn_saveanddisplay,
+TC-005-016,Short name trùng course đã có,5,verifyText,err_shortname,glob:*already used*
+TC-005-017,Short name trùng khác chữ hoa/thường,1,open,add_course_path,
+TC-005-017,Short name trùng khác chữ hoa/thường,2,type,fld_fullname,Duplicate short name case test
+TC-005-017,Short name trùng khác chữ hoa/thường,3,type,fld_shortname,st101
+TC-005-017,Short name trùng khác chữ hoa/thường,4,clickAndWait,btn_saveanddisplay,
+TC-005-017,Short name trùng khác chữ hoa/thường,5,verifyText,err_shortname,glob:*already used*
+TC-005-018,Short name có dấu cách và ký tự đặc biệt,1,open,add_course_path,
+TC-005-018,Short name có dấu cách và ký tự đặc biệt,2,type,fld_fullname,SN special chars
+TC-005-018,Short name có dấu cách và ký tự đặc biệt,3,type,fld_shortname,ST 101-A_2026
+TC-005-018,Short name có dấu cách và ký tự đặc biệt,4,clickAndWait,btn_saveanddisplay,
+TC-005-018,Short name có dấu cách và ký tự đặc biệt,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-019,Không chọn category,1,open,add_course_path,
+TC-005-019,Không chọn category,2,type,fld_fullname,Category none test
+TC-005-019,Không chọn category,3,type,fld_shortname,CAT-NONE
+TC-005-019,Không chọn category,4,click,btn_clear_category,
+TC-005-019,Không chọn category,5,clickAndWait,btn_saveanddisplay,
+TC-005-019,Không chọn category,6,verifyText,err_category,glob:*must supply a value*
+TC-005-020,Course visibility = Hide,1,open,add_course_path,
+TC-005-020,Course visibility = Hide,2,type,fld_fullname,Visibility hide test
+TC-005-020,Course visibility = Hide,3,type,fld_shortname,VIS01
+TC-005-020,Course visibility = Hide,4,select,fld_visible,label=Hide
+TC-005-020,Course visibility = Hide,5,clickAndWait,btn_saveanddisplay,
+TC-005-020,Course visibility = Hide,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-020,Course visibility = Hide,7,storeLocation,currentUrl,
+TC-005-020,Course visibility = Hide,8,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-020,Course visibility = Hide,9,open,${editUrl},
+TC-005-020,Course visibility = Hide,10,verifyValue,fld_visible,0
+TC-005-021,Start date năm nhỏ nhất (1900),1,open,add_course_path,
+TC-005-021,Start date năm nhỏ nhất (1900),2,type,fld_fullname,Start date min year
+TC-005-021,Start date năm nhỏ nhất (1900),3,type,fld_shortname,SD01
+TC-005-021,Start date năm nhỏ nhất (1900),4,select,fld_startdate_month,January
+TC-005-021,Start date năm nhỏ nhất (1900),5,select,fld_startdate_year,1900
+TC-005-021,Start date năm nhỏ nhất (1900),6,select,fld_startdate_day,1
+TC-005-021,Start date năm nhỏ nhất (1900),7,select,fld_startdate_hour,00
+TC-005-021,Start date năm nhỏ nhất (1900),8,select,fld_startdate_minute,00
+TC-005-021,Start date năm nhỏ nhất (1900),9,uncheck,chk_enddate_enabled,
+TC-005-021,Start date năm nhỏ nhất (1900),10,clickAndWait,btn_saveanddisplay,
+TC-005-021,Start date năm nhỏ nhất (1900),11,verifyLocation,glob:*course/view.php?id=*,
+TC-005-022,Start date năm lớn nhất (2050),1,open,add_course_path,
+TC-005-022,Start date năm lớn nhất (2050),2,type,fld_fullname,Start date max year
+TC-005-022,Start date năm lớn nhất (2050),3,type,fld_shortname,SD02
+TC-005-022,Start date năm lớn nhất (2050),4,select,fld_startdate_month,December
+TC-005-022,Start date năm lớn nhất (2050),5,select,fld_startdate_year,2050
+TC-005-022,Start date năm lớn nhất (2050),6,select,fld_startdate_day,31
+TC-005-022,Start date năm lớn nhất (2050),7,select,fld_startdate_hour,23
+TC-005-022,Start date năm lớn nhất (2050),8,select,fld_startdate_minute,59
+TC-005-022,Start date năm lớn nhất (2050),9,uncheck,chk_enddate_enabled,
+TC-005-022,Start date năm lớn nhất (2050),10,clickAndWait,btn_saveanddisplay,
+TC-005-022,Start date năm lớn nhất (2050),11,verifyLocation,glob:*course/view.php?id=*,
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,1,open,add_course_path,
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,2,type,fld_fullname,Start date first
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,3,type,fld_shortname,SD03
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,4,select,fld_startdate_month,January
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,5,select,fld_startdate_year,2026
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,6,select,fld_startdate_day,1
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,7,select,fld_startdate_hour,00
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,8,select,fld_startdate_minute,00
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,9,uncheck,chk_enddate_enabled,
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,10,clickAndWait,btn_saveanddisplay,
+TC-005-023,Start date giá trị nhỏ nhất ngày/tháng/giờ/phút,11,verifyLocation,glob:*course/view.php?id=*,
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,1,open,add_course_path,
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,2,type,fld_fullname,Start date last
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,3,type,fld_shortname,SD04
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,4,select,fld_startdate_month,December
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,5,select,fld_startdate_year,2026
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,6,select,fld_startdate_day,31
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,7,select,fld_startdate_hour,23
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,8,select,fld_startdate_minute,59
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,9,uncheck,chk_enddate_enabled,
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,10,clickAndWait,btn_saveanddisplay,
+TC-005-024,Start date giá trị lớn nhất ngày/tháng/giờ/phút,11,verifyLocation,glob:*course/view.php?id=*,
+TC-005-025,Start date không tồn tại (31 Feb),1,open,add_course_path,
+TC-005-025,Start date không tồn tại (31 Feb),2,type,fld_fullname,Start date non-existent
+TC-005-025,Start date không tồn tại (31 Feb),3,type,fld_shortname,SD05
+TC-005-025,Start date không tồn tại (31 Feb),4,select,fld_startdate_month,label=February
+TC-005-025,Start date không tồn tại (31 Feb),5,select,fld_startdate_year,label=2027
+TC-005-025,Start date không tồn tại (31 Feb),6,select,fld_startdate_day,label=31
+TC-005-025,Start date không tồn tại (31 Feb),7,verifyValue,fld_startdate_day,3
+TC-005-025,Start date không tồn tại (31 Feb),8,verifyValue,fld_startdate_month,3
+TC-005-025,Start date không tồn tại (31 Feb),9,uncheck,chk_enddate_enabled,
+TC-005-025,Start date không tồn tại (31 Feb),10,clickAndWait,btn_saveanddisplay,
+TC-005-025,Start date không tồn tại (31 Feb),11,verifyLocation,glob:*course/view.php?id=*,
+TC-005-026,Tắt end date,1,open,add_course_path,
+TC-005-026,Tắt end date,2,type,fld_fullname,End date off
+TC-005-026,Tắt end date,3,type,fld_shortname,ED01
+TC-005-026,Tắt end date,4,select,fld_startdate_month,label=November
+TC-005-026,Tắt end date,5,select,fld_startdate_year,label=2026
+TC-005-026,Tắt end date,6,select,fld_startdate_day,label=15
+TC-005-026,Tắt end date,7,select,fld_startdate_hour,label=00
+TC-005-026,Tắt end date,8,select,fld_startdate_minute,label=00
+TC-005-026,Tắt end date,9,uncheck,chk_enddate_enabled,
+TC-005-026,Tắt end date,10,clickAndWait,btn_saveanddisplay,
+TC-005-026,Tắt end date,11,verifyLocation,glob:*course/view.php?id=*,
+TC-005-027,End date sau start date 1 phút,1,open,add_course_path,
+TC-005-027,End date sau start date 1 phút,2,type,fld_fullname,End date plus 1 minute
+TC-005-027,End date sau start date 1 phút,3,type,fld_shortname,ED02
+TC-005-027,End date sau start date 1 phút,4,select,fld_startdate_month,label=November
+TC-005-027,End date sau start date 1 phút,5,select,fld_startdate_year,label=2026
+TC-005-027,End date sau start date 1 phút,6,select,fld_startdate_day,label=15
+TC-005-027,End date sau start date 1 phút,7,select,fld_startdate_hour,label=00
+TC-005-027,End date sau start date 1 phút,8,select,fld_startdate_minute,label=00
+TC-005-027,End date sau start date 1 phút,9,select,fld_enddate_month,label=November
+TC-005-027,End date sau start date 1 phút,10,select,fld_enddate_year,label=2026
+TC-005-027,End date sau start date 1 phút,11,select,fld_enddate_day,label=15
+TC-005-027,End date sau start date 1 phút,12,select,fld_enddate_hour,label=00
+TC-005-027,End date sau start date 1 phút,13,select,fld_enddate_minute,label=01
+TC-005-027,End date sau start date 1 phút,14,clickAndWait,btn_saveanddisplay,
+TC-005-027,End date sau start date 1 phút,15,verifyLocation,glob:*course/view.php?id=*,
+TC-005-028,End date bằng start date,1,open,add_course_path,
+TC-005-028,End date bằng start date,2,type,fld_fullname,End date equals start
+TC-005-028,End date bằng start date,3,type,fld_shortname,ED03
+TC-005-028,End date bằng start date,4,select,fld_startdate_month,label=November
+TC-005-028,End date bằng start date,5,select,fld_startdate_year,label=2026
+TC-005-028,End date bằng start date,6,select,fld_startdate_day,label=15
+TC-005-028,End date bằng start date,7,select,fld_startdate_hour,label=00
+TC-005-028,End date bằng start date,8,select,fld_startdate_minute,label=00
+TC-005-028,End date bằng start date,9,select,fld_enddate_month,label=November
+TC-005-028,End date bằng start date,10,select,fld_enddate_year,label=2026
+TC-005-028,End date bằng start date,11,select,fld_enddate_day,label=15
+TC-005-028,End date bằng start date,12,select,fld_enddate_hour,label=00
+TC-005-028,End date bằng start date,13,select,fld_enddate_minute,label=00
+TC-005-028,End date bằng start date,14,clickAndWait,btn_saveanddisplay,
+TC-005-028,End date bằng start date,15,verifyLocation,glob:*course/view.php?id=*,
+TC-005-029,End date trước start date 1 phút,1,open,add_course_path,
+TC-005-029,End date trước start date 1 phút,2,type,fld_fullname,End date minus 1 minute
+TC-005-029,End date trước start date 1 phút,3,type,fld_shortname,ED04
+TC-005-029,End date trước start date 1 phút,4,select,fld_startdate_month,label=November
+TC-005-029,End date trước start date 1 phút,5,select,fld_startdate_year,label=2026
+TC-005-029,End date trước start date 1 phút,6,select,fld_startdate_day,label=15
+TC-005-029,End date trước start date 1 phút,7,select,fld_startdate_hour,label=00
+TC-005-029,End date trước start date 1 phút,8,select,fld_startdate_minute,label=00
+TC-005-029,End date trước start date 1 phút,9,select,fld_enddate_month,label=November
+TC-005-029,End date trước start date 1 phút,10,select,fld_enddate_year,label=2026
+TC-005-029,End date trước start date 1 phút,11,select,fld_enddate_day,label=14
+TC-005-029,End date trước start date 1 phút,12,select,fld_enddate_hour,label=23
+TC-005-029,End date trước start date 1 phút,13,select,fld_enddate_minute,label=59
+TC-005-029,End date trước start date 1 phút,14,clickAndWait,btn_saveanddisplay,
+TC-005-029,End date trước start date 1 phút,15,verifyLocation,glob:*course/edit.php*,
+TC-005-029,End date trước start date 1 phút,16,verifyTextPresent,The course end date must be after the start date.,
+TC-005-030,End date trước start date nhiều năm,1,open,add_course_path,
+TC-005-030,End date trước start date nhiều năm,2,type,fld_fullname,End date years earlier
+TC-005-030,End date trước start date nhiều năm,3,type,fld_shortname,ED05
+TC-005-030,End date trước start date nhiều năm,4,select,fld_startdate_month,label=November
+TC-005-030,End date trước start date nhiều năm,5,select,fld_startdate_year,label=2026
+TC-005-030,End date trước start date nhiều năm,6,select,fld_startdate_day,label=15
+TC-005-030,End date trước start date nhiều năm,7,select,fld_startdate_hour,label=00
+TC-005-030,End date trước start date nhiều năm,8,select,fld_startdate_minute,label=00
+TC-005-030,End date trước start date nhiều năm,9,select,fld_enddate_month,label=November
+TC-005-030,End date trước start date nhiều năm,10,select,fld_enddate_year,label=2025
+TC-005-030,End date trước start date nhiều năm,11,select,fld_enddate_day,label=15
+TC-005-030,End date trước start date nhiều năm,12,select,fld_enddate_hour,label=00
+TC-005-030,End date trước start date nhiều năm,13,select,fld_enddate_minute,label=00
+TC-005-030,End date trước start date nhiều năm,14,clickAndWait,btn_saveanddisplay,
+TC-005-030,End date trước start date nhiều năm,15,verifyLocation,glob:*course/edit.php*,
+TC-005-030,End date trước start date nhiều năm,16,verifyTextPresent,The course end date must be after the start date.,
+TC-005-031,ID number để trống,1,open,add_course_path,
+TC-005-031,ID number để trống,2,type,fld_fullname,ID number empty
+TC-005-031,ID number để trống,3,type,fld_shortname,IDN0
+TC-005-031,ID number để trống,4,type,fld_idnumber,
+TC-005-031,ID number để trống,5,clickAndWait,btn_saveanddisplay,
+TC-005-031,ID number để trống,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-032,ID number 1 ký tự,1,open,add_course_path,
+TC-005-032,ID number 1 ký tự,2,type,fld_fullname,ID number length 1
+TC-005-032,ID number 1 ký tự,3,type,fld_shortname,IDN1
+TC-005-032,ID number 1 ký tự,4,type,fld_idnumber,1
+TC-005-032,ID number 1 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-032,ID number 1 ký tự,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-033,ID number 2 ký tự,1,open,add_course_path,
+TC-005-033,ID number 2 ký tự,2,type,fld_fullname,ID number length 2
+TC-005-033,ID number 2 ký tự,3,type,fld_shortname,IDN2
+TC-005-033,ID number 2 ký tự,4,type,fld_idnumber,12
+TC-005-033,ID number 2 ký tự,5,clickAndWait,btn_saveanddisplay,
+TC-005-033,ID number 2 ký tự,6,verifyLocation,glob:*course/view.php?id=*,
+TC-005-034,ID number 99 ký tự,1,open,add_course_path,
+TC-005-034,ID number 99 ký tự,2,type,fld_fullname,ID number length 99
+TC-005-034,ID number 99 ký tự,3,type,fld_shortname,IDN99
+TC-005-034,ID number 99 ký tự,4,storeEval,'1'.repeat(99),longid
+TC-005-034,ID number 99 ký tự,5,type,fld_idnumber,${longid}
+TC-005-034,ID number 99 ký tự,6,clickAndWait,btn_saveanddisplay,
+TC-005-034,ID number 99 ký tự,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-035,ID number 100 ký tự,1,open,add_course_path,
+TC-005-035,ID number 100 ký tự,2,type,fld_fullname,ID number length 100
+TC-005-035,ID number 100 ký tự,3,type,fld_shortname,IDN100
+TC-005-035,ID number 100 ký tự,4,storeEval,'1'.repeat(100),longid
+TC-005-035,ID number 100 ký tự,5,type,fld_idnumber,${longid}
+TC-005-035,ID number 100 ký tự,6,clickAndWait,btn_saveanddisplay,
+TC-005-035,ID number 100 ký tự,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-036,ID number 101 ký tự,1,open,add_course_path,
+TC-005-036,ID number 101 ký tự,2,type,fld_fullname,ID number length 101
+TC-005-036,ID number 101 ký tự,3,type,fld_shortname,IDN101
+TC-005-036,ID number 101 ký tự,4,storeEval,'1'.repeat(101),longid
+TC-005-036,ID number 101 ký tự,5,type,fld_idnumber,${longid}
+TC-005-036,ID number 101 ký tự,6,clickAndWait,btn_saveanddisplay,
+TC-005-036,ID number 101 ký tự,7,verifyLocation,glob:*course/edit.php*,
+TC-005-037,ID number trùng course đã có,1,open,add_course_path,
+TC-005-037,ID number trùng course đã có,2,type,fld_fullname,Duplicate ID number test
+TC-005-037,ID number trùng course đã có,3,type,fld_shortname,IDDUP1
+TC-005-037,ID number trùng course đã có,4,type,fld_idnumber,ID101
+TC-005-037,ID number trùng course đã có,5,clickAndWait,btn_saveanddisplay,
+TC-005-037,ID number trùng course đã có,6,verifyText,err_idnumber,glob:*already used*
+TC-005-038,Course summary có định dạng,1,open,add_course_path,
+TC-005-038,Course summary có định dạng,2,type,fld_fullname,Summary formatted
+TC-005-038,Course summary có định dạng,3,type,fld_shortname,SUM01
+TC-005-038,Course summary có định dạng,4,selectFrame,index=0,
+TC-005-038,Course summary có định dạng,5,type,editor_body,Dong 1 Dong 2
+TC-005-038,Course summary có định dạng,6,selectFrame,relative=top,
+TC-005-038,Course summary có định dạng,7,clickAndWait,btn_saveanddisplay,
+TC-005-038,Course summary có định dạng,8,verifyLocation,glob:*course/view.php?id=*,
+TC-005-039,Full name và short name cùng để trống,1,open,add_course_path,
+TC-005-039,Full name và short name cùng để trống,2,clickAndWait,btn_saveanddisplay,
+TC-005-039,Full name và short name cùng để trống,3,verifyText,err_fullname,Missing full name
+TC-005-039,Full name và short name cùng để trống,4,verifyText,err_shortname,Missing short name
+TC-005-040,Short name và ID number cùng trùng,1,open,add_course_path,
+TC-005-040,Short name và ID number cùng trùng,2,type,fld_fullname,Duplicate both test
+TC-005-040,Short name và ID number cùng trùng,3,type,fld_shortname,ST101
+TC-005-040,Short name và ID number cùng trùng,4,type,fld_idnumber,ID101
+TC-005-040,Short name và ID number cùng trùng,5,clickAndWait,btn_saveanddisplay,
+TC-005-040,Short name và ID number cùng trùng,6,verifyText,err_shortname,glob:*already used*
+TC-005-040,Short name và ID number cùng trùng,7,verifyText,err_idnumber,glob:*already used*
+TC-005-041,ID number trùng và end date không hợp lệ,1,open,add_course_path,
+TC-005-041,ID number trùng và end date không hợp lệ,2,type,fld_fullname,Duplicate ID and bad end date
+TC-005-041,ID number trùng và end date không hợp lệ,3,type,fld_shortname,DT10
+TC-005-041,ID number trùng và end date không hợp lệ,4,select,fld_startdate_month,label=November
+TC-005-041,ID number trùng và end date không hợp lệ,5,select,fld_startdate_year,label=2026
+TC-005-041,ID number trùng và end date không hợp lệ,6,select,fld_startdate_day,label=15
+TC-005-041,ID number trùng và end date không hợp lệ,7,select,fld_startdate_hour,label=00
+TC-005-041,ID number trùng và end date không hợp lệ,8,select,fld_startdate_minute,label=00
+TC-005-041,ID number trùng và end date không hợp lệ,9,select,fld_enddate_month,label=November
+TC-005-041,ID number trùng và end date không hợp lệ,10,select,fld_enddate_year,label=2025
+TC-005-041,ID number trùng và end date không hợp lệ,11,select,fld_enddate_day,label=15
+TC-005-041,ID number trùng và end date không hợp lệ,12,select,fld_enddate_hour,label=00
+TC-005-041,ID number trùng và end date không hợp lệ,13,select,fld_enddate_minute,label=00
+TC-005-041,ID number trùng và end date không hợp lệ,14,type,fld_idnumber,ID101
+TC-005-041,ID number trùng và end date không hợp lệ,15,clickAndWait,btn_saveanddisplay,
+TC-005-041,ID number trùng và end date không hợp lệ,16,verifyTextPresent,The course end date must be after the start date.,
+TC-005-041,ID number trùng và end date không hợp lệ,17,verifyText,err_idnumber,glob:*already used*
+TC-005-042,"Thiếu full name, short name và category",1,open,add_course_path,
+TC-005-042,"Thiếu full name, short name và category",2,click,btn_clear_category,
+TC-005-042,"Thiếu full name, short name và category",3,clickAndWait,btn_saveanddisplay,
+TC-005-042,"Thiếu full name, short name và category",4,verifyText,err_fullname,Missing full name
+TC-005-042,"Thiếu full name, short name và category",5,verifyText,err_shortname,Missing short name
+TC-005-042,"Thiếu full name, short name và category",6,verifyText,err_category,glob:*must supply a value*
+TC-005-043,Hủy tạo course (Cancel),1,open,add_course_path,
+TC-005-043,Hủy tạo course (Cancel),2,type,fld_fullname,Cancel test
+TC-005-043,Hủy tạo course (Cancel),3,type,fld_shortname,CANCEL01
+TC-005-043,Hủy tạo course (Cancel),4,clickAndWait,btn_cancel,
+TC-005-043,Hủy tạo course (Cancel),5,verifyLocation,course_list_path,
+TC-005-043,Hủy tạo course (Cancel),6,open,manage_search_path,CANCEL01
+TC-005-043,Hủy tạo course (Cancel),7,verifyTextNotPresent,Cancel test,
+TC-005-044,Tìm course vừa tạo trong trang quản lý,1,open,add_course_path,
+TC-005-044,Tìm course vừa tạo trong trang quản lý,2,type,fld_fullname,Check in manage list
+TC-005-044,Tìm course vừa tạo trong trang quản lý,3,type,fld_shortname,UCR01
+TC-005-044,Tìm course vừa tạo trong trang quản lý,4,clickAndWait,btn_saveanddisplay,
+TC-005-044,Tìm course vừa tạo trong trang quản lý,5,verifyLocation,glob:*course/view.php?id=*,
+TC-005-044,Tìm course vừa tạo trong trang quản lý,6,open,manage_search_path,UCR01
+TC-005-044,Tìm course vừa tạo trong trang quản lý,7,verifyTextPresent,Check in manage list,
+TC-005-045,Sửa lỗi rồi gửi lại,1,open,add_course_path,
+TC-005-045,Sửa lỗi rồi gửi lại,2,type,fld_shortname,UCT01
+TC-005-045,Sửa lỗi rồi gửi lại,3,clickAndWait,btn_saveanddisplay,
+TC-005-045,Sửa lỗi rồi gửi lại,4,verifyText,err_fullname,Missing full name
+TC-005-045,Sửa lỗi rồi gửi lại,5,type,fld_fullname,Retry after error test
+TC-005-045,Sửa lỗi rồi gửi lại,6,clickAndWait,btn_saveanddisplay,
+TC-005-045,Sửa lỗi rồi gửi lại,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-046,Tạo course từ Manage courses and categories,1,open,manage_path,
+TC-005-046,Tạo course từ Manage courses and categories,2,clickAndWait,lnk_category_1,
+TC-005-046,Tạo course từ Manage courses and categories,3,clickAndWait,lnk_create_course,
+TC-005-046,Tạo course từ Manage courses and categories,4,type,fld_fullname,Entry via manage page
+TC-005-046,Tạo course từ Manage courses and categories,5,type,fld_shortname,UCE01
+TC-005-046,Tạo course từ Manage courses and categories,6,clickAndWait,btn_saveanddisplay,
+TC-005-046,Tạo course từ Manage courses and categories,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-047,Format = Weekly sections,1,open,add_course_path,
+TC-005-047,Format = Weekly sections,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-047,Format = Weekly sections,3,selectAndWait,fld_format,value=weeks
+TC-005-047,Format = Weekly sections,4,type,fld_fullname,Format weekly test
+TC-005-047,Format = Weekly sections,5,type,fld_shortname,FMT01
+TC-005-047,Format = Weekly sections,6,clickAndWait,btn_saveanddisplay,
+TC-005-047,Format = Weekly sections,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-047,Format = Weekly sections,8,storeLocation,currentUrl,
+TC-005-047,Format = Weekly sections,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-047,Format = Weekly sections,10,open,${editUrl},
+TC-005-047,Format = Weekly sections,11,verifyValue,fld_format,weeks
+TC-005-048,Format = Single activity,1,open,add_course_path,
+TC-005-048,Format = Single activity,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-048,Format = Single activity,3,selectAndWait,fld_format,value=singleactivity
+TC-005-048,Format = Single activity,4,type,fld_fullname,Format single test
+TC-005-048,Format = Single activity,5,type,fld_shortname,FMT02
+TC-005-048,Format = Single activity,6,clickAndWait,btn_saveanddisplay,
+TC-005-048,Format = Single activity,7,open,manage_search_path,FMT02
+TC-005-048,Format = Single activity,8,verifyTextPresent,Format single test,
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,1,open,add_course_path,
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,3,type,fld_fullname,Hidden sections collapsed
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,4,type,fld_shortname,FMT03
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,5,select,fld_hiddensections,value=0
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,6,clickAndWait,btn_saveanddisplay,
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,8,storeLocation,currentUrl,
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,10,open,${editUrl},
+TC-005-049,Hidden sections = hiển thị dạng thu gọn,11,verifyValue,fld_hiddensections,0
+TC-005-050,Course layout = một section mỗi trang,1,open,add_course_path,
+TC-005-050,Course layout = một section mỗi trang,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-050,Course layout = một section mỗi trang,3,type,fld_fullname,Course layout one section
+TC-005-050,Course layout = một section mỗi trang,4,type,fld_shortname,FMT04
+TC-005-050,Course layout = một section mỗi trang,5,select,fld_coursedisplay,value=1
+TC-005-050,Course layout = một section mỗi trang,6,clickAndWait,btn_saveanddisplay,
+TC-005-050,Course layout = một section mỗi trang,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-050,Course layout = một section mỗi trang,8,storeLocation,currentUrl,
+TC-005-050,Course layout = một section mỗi trang,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-050,Course layout = một section mỗi trang,10,open,${editUrl},
+TC-005-050,Course layout = một section mỗi trang,11,verifyValue,fld_coursedisplay,1
+TC-005-051,Force language = English,1,open,add_course_path,
+TC-005-051,Force language = English,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-051,Force language = English,3,type,fld_fullname,Force language English
+TC-005-051,Force language = English,4,type,fld_shortname,APP01
+TC-005-051,Force language = English,5,select,fld_lang,value=en
+TC-005-051,Force language = English,6,clickAndWait,btn_saveanddisplay,
+TC-005-051,Force language = English,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-051,Force language = English,8,storeLocation,currentUrl,
+TC-005-051,Force language = English,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-051,Force language = English,10,open,${editUrl},
+TC-005-051,Force language = English,11,verifyValue,fld_lang,en
+TC-005-052,Number of announcements = 0,1,open,add_course_path,
+TC-005-052,Number of announcements = 0,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-052,Number of announcements = 0,3,type,fld_fullname,Announcements 0
+TC-005-052,Number of announcements = 0,4,type,fld_shortname,APP02
+TC-005-052,Number of announcements = 0,5,select,fld_newsitems,value=0
+TC-005-052,Number of announcements = 0,6,clickAndWait,btn_saveanddisplay,
+TC-005-052,Number of announcements = 0,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-052,Number of announcements = 0,8,storeLocation,currentUrl,
+TC-005-052,Number of announcements = 0,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-052,Number of announcements = 0,10,open,${editUrl},
+TC-005-052,Number of announcements = 0,11,verifyValue,fld_newsitems,0
+TC-005-053,Number of announcements = 1,1,open,add_course_path,
+TC-005-053,Number of announcements = 1,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-053,Number of announcements = 1,3,type,fld_fullname,Announcements 1
+TC-005-053,Number of announcements = 1,4,type,fld_shortname,APP03
+TC-005-053,Number of announcements = 1,5,select,fld_newsitems,value=1
+TC-005-053,Number of announcements = 1,6,clickAndWait,btn_saveanddisplay,
+TC-005-053,Number of announcements = 1,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-053,Number of announcements = 1,8,storeLocation,currentUrl,
+TC-005-053,Number of announcements = 1,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-053,Number of announcements = 1,10,open,${editUrl},
+TC-005-053,Number of announcements = 1,11,verifyValue,fld_newsitems,1
+TC-005-054,Number of announcements = 9,1,open,add_course_path,
+TC-005-054,Number of announcements = 9,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-054,Number of announcements = 9,3,type,fld_fullname,Announcements 9
+TC-005-054,Number of announcements = 9,4,type,fld_shortname,APP04
+TC-005-054,Number of announcements = 9,5,select,fld_newsitems,value=9
+TC-005-054,Number of announcements = 9,6,clickAndWait,btn_saveanddisplay,
+TC-005-054,Number of announcements = 9,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-054,Number of announcements = 9,8,storeLocation,currentUrl,
+TC-005-054,Number of announcements = 9,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-054,Number of announcements = 9,10,open,${editUrl},
+TC-005-054,Number of announcements = 9,11,verifyValue,fld_newsitems,9
+TC-005-055,Number of announcements = 10,1,open,add_course_path,
+TC-005-055,Number of announcements = 10,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-055,Number of announcements = 10,3,type,fld_fullname,Announcements 10
+TC-005-055,Number of announcements = 10,4,type,fld_shortname,APP05
+TC-005-055,Number of announcements = 10,5,select,fld_newsitems,value=10
+TC-005-055,Number of announcements = 10,6,clickAndWait,btn_saveanddisplay,
+TC-005-055,Number of announcements = 10,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-055,Number of announcements = 10,8,storeLocation,currentUrl,
+TC-005-055,Number of announcements = 10,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-055,Number of announcements = 10,10,open,${editUrl},
+TC-005-055,Number of announcements = 10,11,verifyValue,fld_newsitems,10
+TC-005-056,Show gradebook to students = No,1,open,add_course_path,
+TC-005-056,Show gradebook to students = No,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-056,Show gradebook to students = No,3,type,fld_fullname,Gradebook hidden
+TC-005-056,Show gradebook to students = No,4,type,fld_shortname,APP06
+TC-005-056,Show gradebook to students = No,5,select,fld_showgrades,value=0
+TC-005-056,Show gradebook to students = No,6,clickAndWait,btn_saveanddisplay,
+TC-005-056,Show gradebook to students = No,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-056,Show gradebook to students = No,8,storeLocation,currentUrl,
+TC-005-056,Show gradebook to students = No,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-056,Show gradebook to students = No,10,open,${editUrl},
+TC-005-056,Show gradebook to students = No,11,verifyValue,fld_showgrades,0
+TC-005-057,Show activity reports = Yes,1,open,add_course_path,
+TC-005-057,Show activity reports = Yes,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-057,Show activity reports = Yes,3,type,fld_fullname,Activity reports shown
+TC-005-057,Show activity reports = Yes,4,type,fld_shortname,APP07
+TC-005-057,Show activity reports = Yes,5,select,fld_showreports,value=1
+TC-005-057,Show activity reports = Yes,6,clickAndWait,btn_saveanddisplay,
+TC-005-057,Show activity reports = Yes,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-057,Show activity reports = Yes,8,storeLocation,currentUrl,
+TC-005-057,Show activity reports = Yes,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-057,Show activity reports = Yes,10,open,${editUrl},
+TC-005-057,Show activity reports = Yes,11,verifyValue,fld_showreports,1
+TC-005-058,Show activity dates = No,1,open,add_course_path,
+TC-005-058,Show activity dates = No,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-058,Show activity dates = No,3,type,fld_fullname,Activity dates hidden
+TC-005-058,Show activity dates = No,4,type,fld_shortname,APP08
+TC-005-058,Show activity dates = No,5,select,fld_showactivitydates,value=0
+TC-005-058,Show activity dates = No,6,clickAndWait,btn_saveanddisplay,
+TC-005-058,Show activity dates = No,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-058,Show activity dates = No,8,storeLocation,currentUrl,
+TC-005-058,Show activity dates = No,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-058,Show activity dates = No,10,open,${editUrl},
+TC-005-058,Show activity dates = No,11,verifyValue,fld_showactivitydates,0
+TC-005-059,Maximum upload size = 1 MB,1,open,add_course_path,
+TC-005-059,Maximum upload size = 1 MB,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-059,Maximum upload size = 1 MB,3,type,fld_fullname,Upload limit 1MB
+TC-005-059,Maximum upload size = 1 MB,4,type,fld_shortname,UPL01
+TC-005-059,Maximum upload size = 1 MB,5,select,fld_maxbytes,value=1048576
+TC-005-059,Maximum upload size = 1 MB,6,clickAndWait,btn_saveanddisplay,
+TC-005-059,Maximum upload size = 1 MB,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-059,Maximum upload size = 1 MB,8,storeLocation,currentUrl,
+TC-005-059,Maximum upload size = 1 MB,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-059,Maximum upload size = 1 MB,10,open,${editUrl},
+TC-005-059,Maximum upload size = 1 MB,11,verifyValue,fld_maxbytes,1048576
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),1,open,add_course_path,
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),3,type,fld_fullname,Upload limit minimum
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),4,type,fld_shortname,UPL02
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),5,select,fld_maxbytes,value=10240
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),6,clickAndWait,btn_saveanddisplay,
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),8,storeLocation,currentUrl,
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),10,open,${editUrl},
+TC-005-060,Maximum upload size = giá trị nhỏ nhất (10 KB),11,verifyValue,fld_maxbytes,10240
+TC-005-061,Enable completion tracking = No,1,open,add_course_path,
+TC-005-061,Enable completion tracking = No,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-061,Enable completion tracking = No,3,type,fld_fullname,Completion tracking off
+TC-005-061,Enable completion tracking = No,4,type,fld_shortname,CMP01
+TC-005-061,Enable completion tracking = No,5,select,fld_enablecompletion,value=0
+TC-005-061,Enable completion tracking = No,6,clickAndWait,btn_saveanddisplay,
+TC-005-061,Enable completion tracking = No,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-061,Enable completion tracking = No,8,storeLocation,currentUrl,
+TC-005-061,Enable completion tracking = No,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-061,Enable completion tracking = No,10,open,${editUrl},
+TC-005-061,Enable completion tracking = No,11,verifyValue,fld_enablecompletion,0
+TC-005-062,Show activity completion conditions = No,1,open,add_course_path,
+TC-005-062,Show activity completion conditions = No,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-062,Show activity completion conditions = No,3,type,fld_fullname,Completion conditions hidden
+TC-005-062,Show activity completion conditions = No,4,type,fld_shortname,CMP02
+TC-005-062,Show activity completion conditions = No,5,select,fld_showcompletionconditions,value=0
+TC-005-062,Show activity completion conditions = No,6,clickAndWait,btn_saveanddisplay,
+TC-005-062,Show activity completion conditions = No,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-062,Show activity completion conditions = No,8,storeLocation,currentUrl,
+TC-005-062,Show activity completion conditions = No,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-062,Show activity completion conditions = No,10,open,${editUrl},
+TC-005-062,Show activity completion conditions = No,11,verifyValue,fld_showcompletionconditions,0
+TC-005-063,Group mode = Separate groups,1,open,add_course_path,
+TC-005-063,Group mode = Separate groups,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-063,Group mode = Separate groups,3,type,fld_fullname,Group mode separate
+TC-005-063,Group mode = Separate groups,4,type,fld_shortname,GRP01
+TC-005-063,Group mode = Separate groups,5,select,fld_groupmode,value=1
+TC-005-063,Group mode = Separate groups,6,clickAndWait,btn_saveanddisplay,
+TC-005-063,Group mode = Separate groups,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-063,Group mode = Separate groups,8,storeLocation,currentUrl,
+TC-005-063,Group mode = Separate groups,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-063,Group mode = Separate groups,10,open,${editUrl},
+TC-005-063,Group mode = Separate groups,11,verifyValue,fld_groupmode,1
+TC-005-064,Group mode = Visible groups,1,open,add_course_path,
+TC-005-064,Group mode = Visible groups,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-064,Group mode = Visible groups,3,type,fld_fullname,Group mode visible
+TC-005-064,Group mode = Visible groups,4,type,fld_shortname,GRP02
+TC-005-064,Group mode = Visible groups,5,select,fld_groupmode,value=2
+TC-005-064,Group mode = Visible groups,6,clickAndWait,btn_saveanddisplay,
+TC-005-064,Group mode = Visible groups,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-064,Group mode = Visible groups,8,storeLocation,currentUrl,
+TC-005-064,Group mode = Visible groups,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-064,Group mode = Visible groups,10,open,${editUrl},
+TC-005-064,Group mode = Visible groups,11,verifyValue,fld_groupmode,2
+TC-005-065,Force group mode = Yes khi có Group mode,1,open,add_course_path,
+TC-005-065,Force group mode = Yes khi có Group mode,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-065,Force group mode = Yes khi có Group mode,3,type,fld_fullname,Force group mode yes
+TC-005-065,Force group mode = Yes khi có Group mode,4,type,fld_shortname,GRP03
+TC-005-065,Force group mode = Yes khi có Group mode,5,select,fld_groupmode,value=1
+TC-005-065,Force group mode = Yes khi có Group mode,6,select,fld_groupmodeforce,value=1
+TC-005-065,Force group mode = Yes khi có Group mode,7,clickAndWait,btn_saveanddisplay,
+TC-005-065,Force group mode = Yes khi có Group mode,8,verifyLocation,glob:*course/view.php?id=*,
+TC-005-065,Force group mode = Yes khi có Group mode,9,storeLocation,currentUrl,
+TC-005-065,Force group mode = Yes khi có Group mode,10,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-065,Force group mode = Yes khi có Group mode,11,open,${editUrl},
+TC-005-065,Force group mode = Yes khi có Group mode,12,verifyValue,fld_groupmode,1
+TC-005-065,Force group mode = Yes khi có Group mode,13,verifyValue,fld_groupmodeforce,1
+TC-005-066,Force group mode = Yes khi Group mode = No groups,1,open,add_course_path,
+TC-005-066,Force group mode = Yes khi Group mode = No groups,2,runScript,document.querySelectorAll('a.collapseexpand').forEach(function(a){ if(a.textContent.trim()=='Expand all'){ a.click(); } });,
+TC-005-066,Force group mode = Yes khi Group mode = No groups,3,type,fld_fullname,Force group no groups
+TC-005-066,Force group mode = Yes khi Group mode = No groups,4,type,fld_shortname,GRP04
+TC-005-066,Force group mode = Yes khi Group mode = No groups,5,select,fld_groupmodeforce,value=1
+TC-005-066,Force group mode = Yes khi Group mode = No groups,6,clickAndWait,btn_saveanddisplay,
+TC-005-066,Force group mode = Yes khi Group mode = No groups,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-066,Force group mode = Yes khi Group mode = No groups,8,storeLocation,currentUrl,
+TC-005-066,Force group mode = Yes khi Group mode = No groups,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-066,Force group mode = Yes khi Group mode = No groups,10,open,${editUrl},
+TC-005-066,Force group mode = Yes khi Group mode = No groups,11,verifyValue,fld_groupmode,0
+TC-005-066,Force group mode = Yes khi Group mode = No groups,12,verifyValue,fld_groupmodeforce,1
+TC-005-067,Thêm một tag cho course,1,open,add_course_path,
+TC-005-067,Thêm một tag cho course,2,runScript,"document.querySelectorAll('[id$=""hdrcontainer""]').forEach(function(e){ e.classList.add('show'); });",
+TC-005-067,Thêm một tag cho course,3,type,fld_fullname,Tags one tag
+TC-005-067,Thêm một tag cho course,4,type,fld_shortname,TAG01
+TC-005-067,Thêm một tag cho course,5,runScript,"var s=document.getElementById('id_tags'); s.add(new Option('blackbox','blackbox',true,true)); s.dispatchEvent(new Event('change',{bubbles:true}));",
+TC-005-067,Thêm một tag cho course,6,clickAndWait,btn_saveanddisplay,
+TC-005-067,Thêm một tag cho course,7,verifyLocation,glob:*course/view.php?id=*,
+TC-005-067,Thêm một tag cho course,8,storeLocation,currentUrl,
+TC-005-067,Thêm một tag cho course,9,storeEval,"'${currentUrl}'.replace('view.php','edit.php')",editUrl
+TC-005-067,Thêm một tag cho course,10,open,${editUrl},
+TC-005-067,Thêm một tag cho course,11,verifyTextPresent,blackbox,
