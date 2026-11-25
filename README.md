@@ -97,3 +97,97 @@ python NonFunctional/Phuc/test_compatibility.py
 | --- | --- | --- | --- |
 | NFR-01 | Hiệu năng / Thời gian phản hồi (`test_performance.py`) | Dùng `time.perf_counter()` đo thời gian tải form Add a Quiz và thời gian submit/chuyển hướng qua 5 lần chạy (`RUNS = 5`) với fallback JS click khi gặp `ElementClickInterceptedException`. Ngưỡng: trung bình tải form `<= 3.0s` và trung bình submit `<= 4.0s`. | **PASS** — Form load: `min=0.357s`, `mean=0.420s`, `median=0.392s`, `max=0.576s`; Submit: `min=1.665s`, `mean=1.730s`, `median=1.710s`, `max=1.864s`. |
 | NFR-02 | Tương thích (`test_compatibility.py`) | Kiểm tra trang Add a Quiz trên **Chrome** và **Edge** ở 3 viewport (`1440x1000`, `768x1024`, `390x844`), kiểm tra hiển thị của `#id_name` và `#id_submitbutton` cùng độ tràn ngang (`scrollWidth - innerWidth`). | **PASS** (6/6 cấu hình) — Cả Chrome và Edge đều hiển thị đầy đủ `#id_name` và `#id_submitbutton` trên cả 3 kích thước màn hình (`overflow = -15px`). |
+
+---
+
+# Khải — Add a Category in Moodle
+
+Hướng dẫn chạy ba phần kiểm thử cho Feature 001 – **Add a Category**. Tất cả lệnh dưới đây chạy từ thư mục gốc repository. Moodle hiện được cấu hình tại `http://127.0.0.1:9501`; cần Python 3, Chrome hoặc Edge và Selenium trong `requirements.txt`.
+
+## Chuẩn bị chung
+
+```powershell
+python -m pip install -r requirements.txt
+$env:MOODLE_BASE_URL = 'http://127.0.0.1:9501'
+$env:MOODLE_USERNAME = Read-Host 'Moodle username'
+$securePassword = Read-Host 'Moodle password' -AsSecureString
+$env:MOODLE_PASSWORD = [System.Net.NetworkCredential]::new('', $securePassword).Password
+```
+
+Tài khoản cần đăng nhập được Moodle. Level 1, Level 2 và performance submit cần tài khoản có quyền tạo category. Compatibility chỉ mở form, không submit.
+
+## Level 1 — Data-driven automation
+
+Runner: `Level1/Khai/automation.py`; dữ liệu 30 case: `Level1/Khai/test_data.csv`.
+
+```powershell
+python Level1/Khai/automation.py --list
+python Level1/Khai/automation.py --case TC-001-001 --headed
+python Level1/Khai/automation.py
+```
+
+`--list` liệt kê case; `--case <ID>` chạy một case; `--headed` hiện cửa sổ browser. Kết quả nằm tại `Level1/Khai/results/latest_results.csv`.
+
+## Level 2 — Data-driven automation có cấu hình ngoài
+
+Runner: `Level2/Khai/automation.py`; dữ liệu: `Level2/Khai/test_data.csv`; URL, page path và locator: `Level2/Khai/test_config.csv`.
+
+```powershell
+python Level2/Khai/automation.py --list
+python Level2/Khai/automation.py --case TC-001-001 --headed
+python Level2/Khai/automation.py
+```
+
+Có thể dùng `--case <ID>` để chạy riêng/lựa chọn case, `--headed` để hiện browser, hoặc `--browser edge`. Chỉnh Moodle URL/locator trong `test_config.csv` nếu môi trường thay đổi. Username/password vẫn lấy từ environment variables.
+
+### Category mẫu cần chuẩn bị cho các testcase
+
+Các category mẫu này là **dữ liệu fixture trên Moodle**, không được script tự tạo. Cần tạo trước trong Moodle (hoặc dùng category đã có đáp ứng đúng điều kiện) để các case kiểm tra trùng lặp và chọn Parent có đối tượng tham chiếu ổn định. Ví dụ sử dụng một category tên `TC-EXAMPLE`, ID number `tc-example`:
+
+| Testcase | Vì sao cần category mẫu | Giá trị fixture được dùng |
+| --- | --- | --- |
+| `TC-001-012` | Thử tạo thêm category có cùng tên để kiểm tra Moodle có cho phép tên trùng không. | Tên mẫu `TC-EXAMPLE` được dùng làm tên category mới. |
+| `TC-001-016` | Gửi một ID number đã tồn tại để kiểm tra Moodle từ chối ID trùng. | ID number `tc-example` được gửi lại. |
+| `TC-001-025` | Chọn category cha có thật, tạo category con và xác minh quan hệ Parent. | Tên `TC-EXAMPLE` (có thể kèm ID number/ID Moodle để phân biệt nếu có nhiều category trùng tên). |
+| `TC-001-026` | Chọn Parent trong selector rồi xác minh chỉ một giá trị cha được chọn. | Cùng category cha `TC-EXAMPLE`. |
+
+Sau khi bảo đảm category mẫu đã tồn tại và ID number đúng, khai báo:
+
+```powershell
+$env:MOODLE_EXISTING_CATEGORY_NAME = 'TC-EXAMPLE'
+$env:MOODLE_EXISTING_CATEGORY_ID = 'tc-example'
+$env:MOODLE_PARENT_CATEGORY = 'TC-EXAMPLE'
+```
+
+`MOODLE_EXISTING_CATEGORY_NAME` được dùng bởi TC-012, `MOODLE_EXISTING_CATEGORY_ID` bởi TC-016, và `MOODLE_PARENT_CATEGORY` bởi TC-025/026. Nếu site có nhiều category cùng tên, đặt thêm `MOODLE_PARENT_CATEGORY_IDNUMBER` hoặc `MOODLE_PARENT_CATEGORY_ID` đúng category cha. Đảm bảo ID number mẫu không bị thay đổi/xóa trước khi chạy. Các biến môi trường chỉ trỏ tới fixture; chúng không tự tạo fixture. Kết quả nằm tại `Level2/Khai/results/latest_results.csv`.
+
+## Non-functional — Performance
+
+Script: `NonFunctional/Khai/test_performance.py`. Đo thời gian tải form và thời gian submit đến khi category xuất hiện trong danh sách. Mỗi scenario có warm-up và mặc định 5 lần đo. Threshold tham khảo mặc định: form ≤ 3 giây, submit ≤ 5 giây.
+
+```powershell
+python NonFunctional/Khai/test_performance.py
+python NonFunctional/Khai/test_performance.py --runs 7 --browser chrome --headed
+```
+
+Có thể cấu hình threshold trước khi chạy:
+
+```powershell
+$env:PERF_LOAD_THRESHOLD_SECONDS = '3'
+$env:PERF_SUBMIT_THRESHOLD_SECONDS = '5'
+```
+
+Report append vào `NonFunctional/Khai/results/performance_results.csv`. Scenario submit tạo category thật với prefix `NFRPerf_`; sau khi xem report, xóa đúng các category thử nghiệm của lần chạy đó trong Moodle.
+
+## Non-functional — Compatibility
+
+Script: `NonFunctional/Khai/test_compatibility.py`. Kiểm tra Chrome/Edge ở desktop (`1440x1000`), tablet (`768x1024`) và mobile (`390x844`). Script cuộn tới các control, không submit và không tạo category.
+
+```powershell
+python NonFunctional/Khai/test_compatibility.py
+python NonFunctional/Khai/test_compatibility.py --browsers chrome --viewports desktop,tablet,mobile
+```
+
+Nếu chỉ cài một browser, chỉ định browser đó bằng `--browsers chrome` hoặc `--browsers edge`. PASS yêu cầu các control chính dùng được và tràn ngang ≤ 20px. Report append vào `NonFunctional/Khai/results/compatibility_results.csv`.
+
+Lần chạy gần nhất ghi nhận desktop/tablet PASS trên Chrome và Edge; mobile FAIL trên cả hai do nội dung rộng 625px tại viewport 390px (tràn ngang 235px). Ghi kết quả này là giới hạn mobile hiện tại, không đổi threshold để biến thành PASS. Các report được append; đối chiếu timestamp mới nhất để tách lần chạy.
