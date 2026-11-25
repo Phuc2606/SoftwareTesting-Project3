@@ -191,3 +191,58 @@ python NonFunctional/Khai/test_compatibility.py --browsers chrome --viewports de
 Nếu chỉ cài một browser, chỉ định browser đó bằng `--browsers chrome` hoặc `--browsers edge`. PASS yêu cầu các control chính dùng được và tràn ngang ≤ 20px. Report append vào `NonFunctional/Khai/results/compatibility_results.csv`.
 
 Lần chạy gần nhất ghi nhận desktop/tablet PASS trên Chrome và Edge; mobile FAIL trên cả hai do nội dung rộng 625px tại viewport 390px (tràn ngang 235px). Ghi kết quả này là giới hạn mobile hiện tại, không đổi threshold để biến thành PASS. Các report được append; đối chiếu timestamp mới nhất để tách lần chạy.
+----
+# Nguyen— Add a new course in Moodle
+
+Feature 005 – **Add a new course** (`TC-005-001`–`TC-005-067`) bằng Python 3, Selenium và `unittest`. Mỗi level chỉ có
+file `automation.py` (runner nằm ngay trong file) cùng file dữ liệu CSV, nên chỉ cần `requirements.txt` ở gốc repo.
+
+- **Level 1 (`Level1/Nguyen/`)**: `automation.py` + `test_data.csv` – data-driven, 61 case chỉ khác nhau về dữ liệu, chia 3 nhóm
+  (cột `group`: `fields` 29, `dates` 11, `settings` 21). Cột Expected Result: `expected_result`, `expected_text`, `expected_error_*`,
+  `verify*_value`. URL và locator khai báo trực tiếp trong script.
+- **Level 2 (`Level2/Nguyen/`)**: `automation.py` + `test_data.csv` (các bước của 67 case) + `test_config.csv` (URL và locator).
+  Script không chứa URL, locator hay dữ liệu; thêm/sửa case chỉ cần sửa CSV.
+- **Non-Functional (`NonFunctional/Nguyen/`)**: `test_performance.py` (thời gian phản hồi) và `test_security.py` (XSS, HTML injection, SQL injection).
+
+## Chạy trên PowerShell
+
+Cần Python 3, Chrome (hoặc Edge/Firefox) và Moodle đang chạy. Mặc định `http://127.0.0.1:9501`, tài khoản `admin`/`admin`.
+Script tự đăng nhập. **Reset dữ liệu Moodle (hoặc xóa các course đã tạo) trước mỗi lần chạy từng bộ**, vì các case tạo course
+trùng tên (ST101, ID101…) và chạy theo thứ tự số case.
+
+```powershell
+python -m pip install -r requirements.txt
+$env:MOODLE_BASE_URL = "http://127.0.0.1:9501"
+$env:MOODLE_USERNAME = Read-Host 'Moodle username'
+$env:MOODLE_PASSWORD = Read-Host 'Moodle password' -MaskInput
+
+python Level1/Nguyen/automation.py
+python Level2/Nguyen/automation.py
+python NonFunctional/Nguyen/test_performance.py
+python NonFunctional/Nguyen/test_security.py
+```
+
+macOS/Linux: thay các dòng `$env:` bằng `export MOODLE_USERNAME=admin MOODLE_PASSWORD=admin`.
+
+Tùy chọn của `automation.py` (Level 1 và Level 2): `--list` liệt kê case, `--case TC-005-016` chạy riêng (lặp lại được),
+`--browser {chrome,edge,firefox}`, `--headless` chạy ẩn trình duyệt (mặc định hiện cửa sổ). Kết quả ghi ở
+`Level1/Nguyen/results/latest_results.csv` và `Level2/Nguyen/results/latest_results.csv`.
+`test_performance.py` có thêm `--runs N` (mặc định 10), kết quả append vào `NonFunctional/Nguyen/results/performance_results.csv`;
+`test_security.py` ghi `results/security_results.csv`.
+
+## Kiểm thử phi chức năng của Nguyen
+
+| ID | Loại kiểm thử | Cách thực hiện và tiêu chí đạt |
+| --- | --- | --- |
+| PERF-01 | Hiệu năng | Tải form Add a new course: 1 lần khởi động + 10 lần đo bằng `time.perf_counter()`. Trung bình ≤ 3,0 s, lần chậm nhất ≤ 5,0 s. |
+| PERF-02 | Hiệu năng | Tải trang Manage courses and categories. Trung bình ≤ 3,0 s, lần chậm nhất ≤ 5,0 s. |
+| PERF-03 | Hiệu năng | Bấm Save and display tạo course hợp lệ (short name duy nhất). Trung bình ≤ 5,0 s, lần chậm nhất ≤ 8,0 s. |
+| SEC-01…08 | Bảo mật đầu vào | 8 payload XSS / HTML injection / SQL injection vào Full name, Short name, ID number. Đạt nếu không có `alert()` được thực thi, payload HTML được mã hóa trong `page_source` (kể cả ở trang Manage courses) và không lộ lỗi cơ sở dữ liệu. |
+
+Ghi nhận khi chạy trên Moodle local: Level 1 61/61, Level 2 67/67, Security 8/8, Performance 2/3. PERF-01 Fail
+(trung bình 4,68 s, chậm nhất 6,35 s) do form nặng TinyMCE và nhiều mục cài đặt; giữ nguyên ngưỡng.
+PERF-02: avg 1,33 s, max 3,08 s; PERF-03: avg 3,12 s, max 3,71 s.
+
+Các cạm bẫy khi chuyển từ Katalon (đã xử lý trong script): `type` của Katalon bỏ qua `maxlength` nên chuỗi dài được gán bằng JavaScript;
+dropdown nâng cao nằm trong mục thu gọn nên bấm "Expand all" và chờ mở xong (nếu vẫn ẩn thì đặt giá trị bằng JavaScript);
+ô soạn thảo TinyMCE nằm trong iframe; đổi Course format làm form tải lại nên phải chờ.
