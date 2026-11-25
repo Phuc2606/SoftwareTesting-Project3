@@ -1,0 +1,23 @@
+﻿key,type,value
+base_url,setting,http://127.0.0.1:9501
+login_path,setting,/login/index.php
+category_management_path,setting,/course/management.php?categoryid=0
+add_category_path,setting,/course/editcategory.php?parent=0
+edit_category_path,setting,/course/editcategory.php
+timeout_seconds,setting,15
+username,id,username
+password,id,password
+login,id,loginbtn
+name,id,id_name
+idnumber,id,id_idnumber
+description,id,id_description_editor
+description_frame,id,id_description_editor_ifr
+parent,id,id_parent
+submit,id,id_submitbutton
+cancel,id,id_cancel
+body,tag name,body
+error_notifications,css selector,".error, .form-control-feedback, [role='alert'], .alert-danger, .alert-warning, .invalid-feedback, .text-danger"
+category_error_name,id,id_error_name
+category_error_idnumber,id,id_error_idnumber
+category_links,css selector,a
+category_edit_links,css selector,"a[href*='editcategory.php?id=']"
