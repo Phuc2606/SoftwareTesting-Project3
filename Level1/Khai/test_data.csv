@@ -1,0 +1,31 @@
+﻿case_id,technique,title,action,category_name,name_length,name_pattern,category_idnumber,id_length,id_pattern,description,description_length,parent_category,expected_result,assertion,prerequisites
+TC-001-001,ECP,Tạo category tại Top,submit,Khai TC001001 {run},,,K001001_{run},,,test,,Top,Tạo thành công tại cấp gốc.,created_details,none
+TC-001-002,ECP,Name bỏ trống,submit,,,,,,,,,Top,Báo Required; không tạo category.,required_error,none
+TC-001-003,ECP,Name dài 200 ký tự,submit,,200,A,K001003_{run},,,,,Top,Tạo thành công.,created_details,none
+TC-001-004,ECP,Name dài 250 ký tự,submit,,250,A,K001004_{run},,,,,Top,Tạo thành công.,created_details,none
+TC-001-005,BVA,Name dài 254 ký tự,submit,,254,A,K001005_{run},,,,,Top,Nhận đủ chuỗi và tạo thành công.,created_details,none
+TC-001-006,BVA,Name dài 255 ký tự,submit,,255,A,K001006_{run},,,,,Top,Nhận đủ chuỗi và tạo thành công.,created_details,none
+TC-001-007,BVA,Name dài 256 ký tự,submit,,256,A,K001007_{run},,,,,Top,Dự kiến từ chối với lỗi Name quá dài; ghi nhận thực tế.,category_name_too_long,none
+TC-001-008,ECP,Name dài 300 ký tự,submit,,300,A,K001008_{run},,,,,Top,Dự kiến báo Name quá dài; ghi nhận thực tế.,category_name_too_long,none
+TC-001-009,ECP,Name có ký tự đặc biệt,submit,Test & Development #1,,,K001009_{run},,,,,Top,Tạo thành công; hiển thị đúng ký tự.,created_details,none
+TC-001-010,ECP,Name có khoảng trắng đầu/cuối,submit,  Category trim TC010  ,,,CAT_TC001010_{run},,,,,Top,Tạo category thành công.,created_by_id,none
+TC-001-011,ECP,Name chỉ có khoảng trắng,submit,   ,,,CAT_TC001011_{run},,,,,Top,Tạo category thành công.,created_by_id,none
+TC-001-012,ECP,Tên category trùng,submit,@existing_name,,,K001012_{run},,,,,Top,Dự kiến cho phép tên trùng.,duplicate_name_allowed,Chuẩn bị category có sẵn; đặt MOODLE_EXISTING_CATEGORY_NAME đúng tên đó.
+TC-001-013,ECP,ID number rỗng,submit,Khai TC001013 {run},,,,,,,,Top,Tạo thành công; ID không bắt buộc.,created_details,none
+TC-001-014,ECP,ID number dạng số,submit,Khai TC001014 {run},,,123456,,,,,Top,Lưu ID thành công.,created_details,none
+TC-001-015,ECP,ID number có ký tự đặc biệt,submit,Khai TC001015 {run},,,CAT-001,,,,,Top,Lưu ID thành công.,created_details,none
+TC-001-016,ECP,ID number trùng,submit,Khai TC001016 {run},,,@existing_id,,,,,Top,Báo lỗi ID đã được sử dụng; không tạo category.,duplicate_id,Chuẩn bị category có sẵn; đặt MOODLE_EXISTING_CATEGORY_ID đúng ID đó.
+TC-001-017,BVA,ID dài 99 ký tự,submit,Khai TC001017 {run},,,,99,A,,,Top,Nhận đủ giá trị.,created_details,none
+TC-001-018,BVA,ID dài 100 ký tự,submit,Khai TC001018 {run},,,,100,A,,,Top,Nhận đủ giá trị tại biên.,created_details,none
+TC-001-019,BVA,ID dài 101 ký tự,submit,Khai TC001019 {run},,,,101,A,,,Top,Giới hạn tại 100; xác minh giá trị được lưu.,id_limited_to_100,none
+TC-001-020,ECP,Description rỗng,submit,Khai TC001020 {run},,,K001020_{run},,,,,Top,Tạo category thành công.,created_details,none
+TC-001-021,ECP,Description dài 300 ký tự,submit,Khai TC001021 {run},,,K001021_{run},,,,300,Top,Lưu Description thành công.,created_details,none
+TC-001-022,ECP,Description tiếng Việt,submit,Khai TC001022 {run},,,K001022_{run},,,Mô tả danh mục kiểm thử,,Top,Lưu và hiển thị đúng dấu.,created_details,none
+TC-001-023,ECP,Description rich text,submit,Khai TC001023 {run},,,K001023_{run},,,<p>Đoạn văn <strong>in đậm</strong></p>,,Top,Lưu định dạng rich text thành công.,created_details,none
+TC-001-024,ECP,Parent là Top,submit,Khai TC001024 {run},,,K001024_{run},,,,,Top,Category mới thuộc cấp gốc.,created_details,none
+TC-001-025,ECP,Parent là category có sẵn,submit,Khai TC001025 {run},,,K001025_{run},,,,,@parent,Category mới nằm dưới đúng category cha.,created_details,Chuẩn bị category cha; đặt MOODLE_PARENT_CATEGORY đúng tên hiển thị.
+TC-001-026,ECP,Chỉ chọn một Parent,select_parent,,,,,,,,,@parent,Tại một thời điểm chỉ một Parent được chọn.,parent_selected,Chuẩn bị category cha; đặt MOODLE_PARENT_CATEGORY đúng tên hiển thị.
+TC-001-027,ECP,Description và ID rỗng,submit,Khai TC001027 {run},,,,,,,,Top,Tạo category thành công.,created_details,none
+TC-001-028,ECP,Name và ID hợp lệ,submit,Khai TC001028 {run},,,KhaiID028_{run},,,,,Top,Tạo thành công và dữ liệu được lưu.,created_details,none
+TC-001-029,Use-case,Hủy tạo category,cancel,Khai TC001029 {run},,,K001029_{run},,,,,Top,Không tạo category; quay lại trang trước.,cancel_no_create,none
+TC-001-030,Use-case,Xác minh category sau khi tạo,submit,Khai TC001030 {run},,,K001030_{run},,,Mô tả TC001030,,Top,"Tên, ID, Description và Parent hiển thị đúng.",created_details,none
