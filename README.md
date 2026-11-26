@@ -50,17 +50,17 @@ Hai ca dùng Selenium WebDriver và `unittest`. Ngưỡng thời gian được c
 
 # Phuc — Add a Quiz in Moodle
 
-Tự động hóa kiểm thử chức năng và phi chức năng cho tính năng **Add a Quiz** (`TC-004-001`–`TC-004-022`) trên Moodle local bằng Python 3, Selenium và `unittest`.
+Tự động hóa kiểm thử chức năng và phi chức năng cho tính năng **Add a Quiz** (`TC-004-001`–`TC-004-022`, 22 test case) trên Moodle local bằng Python 3, Selenium và `unittest`. Mỗi level có runner ngay trong `automation.py`.
 
-- **Level 1 (`Level1/Phuc/automation.py`)**: Kiểm thử hướng dữ liệu (`data-driven`) đọc bộ test case từ `Level1/Phuc/test_data.csv`, khai báo URL và element locator trực tiếp trong script.
-- **Level 2 (`Level2/Phuc/automation.py`)**: Tách riêng dữ liệu test (`Level2/Phuc/test_data.csv`) cùng cấu hình URL và UI element locators (`Level2/Phuc/test_config.csv`).
-- **Non-Functional (`NonFunctional/Phuc/`)**: Gồm `test_performance.py` và `test_compatibility.py`.
+* **Level 1 (`Level1/Phuc/automation.py`)**: Kiểm thử hướng dữ liệu (*data-driven*) đọc test case từ `Level1/Phuc/test_data.csv`, khai báo đường dẫn và element locator trực tiếp trong script.
+* **Level 2 (`Level2/Phuc/automation.py`)**: Tách dữ liệu test sang `Level2/Phuc/test_data.csv`, cấu hình đường dẫn và UI element locator sang `Level2/Phuc/test_config.csv`.
+* **Non-Functional (`NonFunctional/Phuc/`)**: Gồm `test_performance.py` và `test_compatibility.py`.
 
 ## Chạy trên PowerShell
 
-Cấu hình mặc định sử dụng Moodle local tại `http://127.0.0.1:9501`, `MOODLE_COURSE_ID="4"` và `MOODLE_SECTION_ID="16"`. Cần đặt `MOODLE_USERNAME` và `MOODLE_PASSWORD` trước khi chạy:
+Mở PowerShell tại thư mục repo. Cấu hình mặc định sử dụng Moodle local tại `http://127.0.0.1:9501`, `MOODLE_COURSE_ID="4"` và `MOODLE_SECTION_ID="16"`. Cần đặt `MOODLE_USERNAME` và `MOODLE_PASSWORD` trước khi chạy:
 
-```powershell
+```
 $env:MOODLE_BASE_URL = "http://127.0.0.1:9501"
 $env:MOODLE_USERNAME = Read-Host 'Moodle username'
 $env:MOODLE_PASSWORD = Read-Host 'Moodle password' -MaskInput
@@ -72,31 +72,55 @@ python Level2/Phuc/automation.py --headed
 ```
 
 Các tùy chọn hỗ trợ cho `automation.py` của cả Level 1 và Level 2:
-- `--list`: Liệt kê các test case mà không mở trình duyệt.
-- `--case <ID>`: Chạy một hoặc nhiều test case cụ thể (có thể lặp lại `--case`).
-- `--headed`: Hiển thị cửa sổ trình duyệt thay vì chạy headless.
-- `--browser {chrome,edge}`: Chọn trình duyệt (`chrome` mặc định hoặc `edge`).
+
+* `--list`: Liệt kê các test case mà không mở trình duyệt.
+* `--case <ID>`: Chạy một hoặc nhiều test case cụ thể (có thể lặp lại `--case`).
+* `--headed`: Hiển thị cửa sổ trình duyệt thay vì chạy *headless*.
+* `--browser {chrome,edge}`: Chọn trình duyệt (`chrome` mặc định hoặc `edge`).
 
 ## Xử lý tương tác form Moodle & chuyển đổi Level 2
 
-- Mở mục **Overall feedback** an toàn dựa trên trạng thái hiển thị của khu vực feedback / `iframe` và điền nội dung editor TinyMCE (`Good` / `Bad`) mà không gây trùng khớp thiếu ô gap trên boundary.
-- Xử lý trường hợp nút lưu (`#id_submitbutton`) bị che/chặn khi cuộn bằng fallback click qua JavaScript (`ElementClickInterceptedException`).
-- Kiểm tra riêng `TC-004-014` khi nhập giá trị không phải số (`abc`) vào ô thời gian dạng số.
-- Chuyển toàn bộ đường dẫn (`login_path`, `add_quiz_path`) và locator (`username`, `password`, `login`, `name`, `time_enabled`, `time_minutes`, `grade_to_pass`, `attempts`, `save`, `cancel`, `body`, `feedback_boundary`) sang `Level2/Phuc/test_config.csv`.
+* Mở mục **Overall feedback** an toàn dựa trên trạng thái hiển thị của khu vực feedback / `iframe` và điền nội dung editor TinyMCE (`Good` / `Bad`) mà không gây trùng khớp thiếu ô *gap* trên *boundary*.
+* Xử lý trường hợp nút lưu (`#id_submitbutton`) bị che/chặn khi cuộn bằng *fallback click* qua JavaScript (`ElementClickInterceptedException`).
+* Kiểm tra riêng `TC-004-014` khi nhập giá trị không phải số (`abc`) vào ô thời gian dạng số.
+* Chuyển toàn bộ đường dẫn (`login_path`, `add_quiz_path`) và locator (`username`, `password`, `login`, `name`, `time_enabled`, `time_minutes`, `grade_to_pass`, `attempts`, `save`, `cancel`, `body`, `feedback_boundary`) sang `Level2/Phuc/test_config.csv`.
+
+## Kết quả kiểm thử chức năng
+
+## Kết quả kiểm thử chức năng
+
+Cả hai cấp độ đều thực thi đầy đủ **22/22 test case** (`TC-004-001`–`TC-004-022`) trên Moodle local (`http://127.0.0.1:9501`, khóa học `4`, section `16`) bằng Python 3, Selenium và `unittest` ở chế độ `--headed`:
+
+- **Level 1 (`Level1/Phuc/automation.py --headed`)**: Đạt **22/22** ca (`OK`), tổng thời gian thực thi **`137.943s`** (trung bình ~`6.27s`/ca, bao gồm khởi tạo/điều hướng và tương tác form Moodle).
+- **Level 2 (`Level2/Phuc/automation.py --headed`)**: Đạt **22/22** ca (`OK`), tổng thời gian thực thi **`113.969s`** (nhanh hơn `23.974s` so với Level 1, trung bình ~`5.18s`/ca).
+
+### Phân nhóm 22 test case đã kiểm chứng (`TC-004-001`–`TC-004-022`)
+
+| Nhóm kiểm thử | Mã test case | Nội dung kiểm chứng chính | Kết quả Level 1 | Kết quả Level 2 |
+| :--- | :--- | :--- | :---: | :---: |
+| **Tên quiz & giá trị biên độ dài** | `TC-004-001`–`TC-004-009` | Tên quiz hợp lệ (`TC-004-001`), rỗng (`TC-004-002`), chỉ khoảng trắng (`TC-004-003`), 1 ký tự (`TC-004-004`), biên độ dài 258 ký tự `A` (`TC-004-005`), 255 ký tự `b` (`TC-004-006`), 256 ký tự `b` (`TC-004-007`), tiếng Việt & ký tự đặc biệt (`TC-004-008`), khoảng trắng đầu/cuối (`TC-004-009`). | **22/22 PASS** | **22/22 PASS** |
+| **Giới hạn thời gian (`Time limit`)** | `TC-004-010`–`TC-004-014` | Bật time limit với ô phút trống/0 (`TC-004-010`), 1 phút (`TC-004-011`), 45 phút (`TC-004-012`), số âm `-5` (`TC-004-013`), và giá trị không phải số `abc` (`TC-004-014`). | **22/22 PASS** | **22/22 PASS** |
+| **Điểm đạt (`Grade to pass`)** | `TC-004-015`–`TC-004-019` | Giá trị `0` (`TC-004-015`), `5.5` (`TC-004-016`), `10` (`TC-004-017`), vượt thang tối đa `10.01` (`TC-004-018`), và số âm `-1` (`TC-004-019`). | **22/22 PASS** | **22/22 PASS** |
+| **Số lần làm bài & Hủy tạo** | `TC-004-020`–`TC-004-022` | Giới hạn 1 lần (`TC-004-020`), không giới hạn (`TC-004-021`), và hủy tạo quiz (`TC-004-022`). | **22/22 PASS** | **22/22 PASS** |
+
+### Ghi nhận kỹ thuật khi chạy thực tế
+
+- **Tính ổn định khi chạy toàn bộ suite:** Khi chạy đơn lẻ (`--case TC-004-001`) hoặc chạy đủ 22 case liên tiếp, toàn bộ đều đạt `OK` sau khi xử lý đồng bộ *Overall feedback* / TinyMCE (`Good` / `Bad`), *fallback* click JS cho `#id_submitbutton` khi gặp `ElementClickInterceptedException`, và kiểm tra riêng đầu vào không hợp lệ ở `TC-004-014`.
+- **Khác biệt giữa Level 1 và Level 2:** Level 2 tách toàn bộ đường dẫn (`login_path`, `add_quiz_path`) và locator (`username`, `password`, `login`, `name`, `time_enabled`, `time_minutes`, `grade_to_pass`, `attempts`, `save`, `cancel`, `body`, `feedback_boundary`) ra `Level2/Phuc/test_config.csv` mà vẫn giữ nguyên kết quả kiểm thử `22/22` đạt.
 
 ## Kiểm thử phi chức năng của Phuc
 
 Chạy hai script kiểm thử phi chức năng trong `NonFunctional/Phuc/` với cùng biến môi trường Moodle local:
 
-```powershell
+```
 python NonFunctional/Phuc/test_performance.py
 python NonFunctional/Phuc/test_compatibility.py
 ```
 
 | ID | Loại kiểm thử | Cách thực hiện và tiêu chí đạt | Kết quả ghi nhận |
-| --- | --- | --- | --- |
-| NFR-01 | Hiệu năng / Thời gian phản hồi (`test_performance.py`) | Dùng `time.perf_counter()` đo thời gian tải form Add a Quiz và thời gian submit/chuyển hướng qua 5 lần chạy (`RUNS = 5`) với fallback JS click khi gặp `ElementClickInterceptedException`. Ngưỡng: trung bình tải form `<= 3.0s` và trung bình submit `<= 4.0s`. | **PASS** — Form load: `min=0.357s`, `mean=0.420s`, `median=0.392s`, `max=0.576s`; Submit: `min=1.665s`, `mean=1.730s`, `median=1.710s`, `max=1.864s`. |
-| NFR-02 | Tương thích (`test_compatibility.py`) | Kiểm tra trang Add a Quiz trên **Chrome** và **Edge** ở 3 viewport (`1440x1000`, `768x1024`, `390x844`), kiểm tra hiển thị của `#id_name` và `#id_submitbutton` cùng độ tràn ngang (`scrollWidth - innerWidth`). | **PASS** (6/6 cấu hình) — Cả Chrome và Edge đều hiển thị đầy đủ `#id_name` và `#id_submitbutton` trên cả 3 kích thước màn hình (`overflow = -15px`). |
+| :--- | :--- | :--- | :--- |
+| **NFR-01** | Hiệu năng / Thời gian phản hồi (`test_performance.py`) | Dùng `time.perf_counter()` đo thời gian tải form Add a Quiz và thời gian submit/chuyển hướng qua 5 lần chạy (`RUNS = 5`) với *fallback* JS click khi gặp `ElementClickInterceptedException`. Ngưỡng: trung bình tải form $\le$ `3.0s` và trung bình submit $\le$ `4.0s`. | **PASS** — Form load: `min=0.357s`, `mean=0.420s`, `median=0.392s`, `max=0.576s`; Submit: `min=1.665s`, `mean=1.730s`, `median=1.710s`, `max=1.864s`. |
+| **NFR-02** | Tương thích (`test_compatibility.py`) | Kiểm tra trang Add a Quiz trên **Chrome** và **Edge** ở 3 viewport (`1440x1000`, `768x1024`, `390x844`), kiểm tra hiển thị của `#id_name` và `#id_submitbutton` cùng độ tràn ngang (`scrollWidth - innerWidth`). | **PASS (6/6 cấu hình)** — Cả Chrome và Edge đều hiển thị đầy đủ `#id_name` và `#id_submitbutton` trên cả 3 kích thước màn hình (`overflow = -15px`). |
 
 ---
 
@@ -261,9 +285,9 @@ Các cạm bẫy khi chuyển từ Katalon (đã xử lý trong script): `type` 
 dropdown nâng cao nằm trong mục thu gọn nên bấm "Expand all" và chờ mở xong (nếu vẫn ẩn thì đặt giá trị bằng JavaScript);
 ô soạn thảo TinyMCE nằm trong iframe; đổi Course format làm form tải lại nên phải chờ.
 
-# Quan — Create a New User in Moodle
+# Quan — Add a New User in Moodle
 
-Feature – **Create a new user** trên Moodle local, được tự động hóa kiểm thử bằng Python 3, Selenium và `unittest`.
+Feature – **Add a new user** trên Moodle local, được tự động hóa kiểm thử bằng Python 3, Selenium và `unittest`.
 
 Bộ kiểm thử gồm hai level chức năng và hai script kiểm thử phi chức năng:
 
