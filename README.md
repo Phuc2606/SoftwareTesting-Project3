@@ -245,4 +245,8 @@ PERF-02: avg 1,33 s, max 3,08 s; PERF-03: avg 3,12 s, max 3,71 s.
 
 Các cạm bẫy khi chuyển từ Katalon (đã xử lý trong script): `type` của Katalon bỏ qua `maxlength` nên chuỗi dài được gán bằng JavaScript;
 dropdown nâng cao nằm trong mục thu gọn nên bấm "Expand all" và chờ mở xong (nếu vẫn ẩn thì đặt giá trị bằng JavaScript);
+<<<<<<< HEAD
 ô soạn thảo TinyMCE nằm trong iframe; đổi Course format làm form tải lại nên phải chờ.
+=======
+ô soạn thảo TinyMCE nằm trong iframe; đổi Course format làm form tải lại nên phải chờ.
+>>>>>>> 7623d20 (Test Add a new user)

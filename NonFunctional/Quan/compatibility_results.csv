@@ -1,0 +1,4 @@
+﻿browser,viewport,target_width,target_height,actual_width,document_width,overflow_px,username_visible,firstname_visible,email_visible,save_visible,status,error
+chrome,desktop,1440,1000,1440,1425,0,True,True,True,True,PASS,
+chrome,tablet,768,1024,768,753,0,True,True,True,True,PASS,
+chrome,mobile,390,844,390,390,0,True,True,True,True,PASS,
