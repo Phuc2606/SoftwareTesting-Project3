@@ -190,7 +190,21 @@ python NonFunctional/Khai/test_compatibility.py --browsers chrome --viewports de
 
 Nếu chỉ cài một browser, chỉ định browser đó bằng `--browsers chrome` hoặc `--browsers edge`. PASS yêu cầu các control chính dùng được và tràn ngang ≤ 20px. Report append vào `NonFunctional/Khai/results/compatibility_results.csv`.
 
-Lần chạy gần nhất ghi nhận desktop/tablet PASS trên Chrome và Edge; mobile FAIL trên cả hai do nội dung rộng 625px tại viewport 390px (tràn ngang 235px). Ghi kết quả này là giới hạn mobile hiện tại, không đổi threshold để biến thành PASS. Các report được append; đối chiếu timestamp mới nhất để tách lần chạy.
+## Kết quả chạy ba phần kiểm thử
+
+| Phần | Kết quả đã xác nhận | Ghi chú |
+| --- | --- | --- |
+| Level 1 – Functional | **PASS toàn bộ 30 testcase** theo lần chạy full được xác nhận. | Report từng lần chạy được tạo tự động nằm ở `Level1/Khai/results/latest_results.csv` sau khi chạy;  |
+| Level 2 – Functional | **PASS toàn bộ 30 testcase** theo lần chạy full được xác nhận. | Report từng lần chạy được tạo tự động nằm ở `Level2/Khai/results/latest_results.csv` sau khi chạy;  |
+| Non-functional – Performance | **PASS** sau lần chạy lại đầy đủ hai scenario. | Có warm-up, 5 lần đo mỗi scenario; report CSV là bằng chứng chi tiết được tạo tự động sau khi chạy tại `NonFunctional/Khai/results/performance_results.csv`. |
+| Non-functional – Compatibility | **4/6 PASS, 2/6 FAIL** trong lần chạy Chrome + Edge mới nhất. | Desktop và tablet PASS trên cả hai browser. Hai FAIL đều ở mobile 390×844, chi tiết bên dưới. |
+
+### Hai kết quả Compatibility FAIL
+
+- **Chrome – Mobile 390×844: FAIL.** Viewport đúng 390px, nhưng nội dung trang rộng 625px nên tràn ngang **235px** (ngưỡng tối đa 20px). Sau khi script cuộn tới control, Submit hiển thị trong viewport; FAIL do tràn ngang còn lại.
+- **Edge – Mobile 390×844: FAIL.** Cùng kết quả: nội dung rộng 625px, tràn ngang **235px**. Submit hiển thị sau khi cuộn; FAIL do vượt ngưỡng tràn ngang.
+
+
 ----
 # Nguyen— Add a new course in Moodle
 
@@ -245,8 +259,138 @@ PERF-02: avg 1,33 s, max 3,08 s; PERF-03: avg 3,12 s, max 3,71 s.
 
 Các cạm bẫy khi chuyển từ Katalon (đã xử lý trong script): `type` của Katalon bỏ qua `maxlength` nên chuỗi dài được gán bằng JavaScript;
 dropdown nâng cao nằm trong mục thu gọn nên bấm "Expand all" và chờ mở xong (nếu vẫn ẩn thì đặt giá trị bằng JavaScript);
-<<<<<<< HEAD
 ô soạn thảo TinyMCE nằm trong iframe; đổi Course format làm form tải lại nên phải chờ.
-=======
-ô soạn thảo TinyMCE nằm trong iframe; đổi Course format làm form tải lại nên phải chờ.
->>>>>>> 7623d20 (Test Add a new user)
+
+# Quan — Create a New User in Moodle
+
+Feature – **Create a new user** trên Moodle local, được tự động hóa kiểm thử bằng Python 3, Selenium và `unittest`.
+
+Bộ kiểm thử gồm hai level chức năng và hai script kiểm thử phi chức năng:
+
+- **Level 1 (`Level1/Quan/`)**: `automation.py` và `test_data.csv`. Kiểm thử hướng dữ liệu (data-driven), locator và URL được khai báo trực tiếp trong script.
+- **Level 2 (`Level2/Quan/`)**: `automation.py`, `test_data.csv` và `test_config.csv`. Tách dữ liệu kiểm thử khỏi cấu hình URL và UI element locators.
+- **Non-Functional (`NonFunctional/Quan/`)**:
+  - `test_performance.py`: đo thời gian tải và mức độ sẵn sàng của form Add a new user.
+  - `test_compatibility.py`: kiểm tra khả năng hiển thị form trên Desktop, Tablet và Mobile.
+
+Cả hai level chức năng sử dụng helper dùng chung tại `common/moodle_support.py` để xử lý đăng nhập, tương tác với form Moodle, thực thi test case và ghi nhận kết quả.
+
+## Chạy trên PowerShell
+
+Cần Python 3, Chrome hoặc Edge, Selenium và Moodle local đang chạy. URL mặc định là `http://127.0.0.1:9501`.
+
+Cài đặt thư viện và khai báo thông tin đăng nhập:
+
+```powershell
+python -m pip install -r requirements.txt
+
+$env:MOODLE_BASE_URL = "http://127.0.0.1:9501"
+$env:MOODLE_ADMIN_USER = Read-Host 'Moodle admin username'
+$env:MOODLE_ADMIN_PASSWORD = Read-Host 'Moodle admin password' -MaskInput
+```
+
+Chạy lần lượt hai level chức năng:
+
+```powershell
+python Level1/Quan/automation.py --browser chrome
+python Level2/Quan/automation.py --browser chrome
+```
+
+Các tùy chọn hỗ trợ cho runner của Level 1 và Level 2:
+- `--browser {chrome,edge}`: chọn trình duyệt, mặc định là Chrome.
+- `--headed`: hiển thị cửa sổ trình duyệt khi chạy kiểm thử.
+- `--case <ID>`: chạy riêng một test case, ví dụ `--case TC-003-020`.
+
+Level 2 sử dụng `test_config.csv` để khai báo URL và locator. Khi cấu trúc giao diện Moodle thay đổi, có thể cập nhật locator trong file cấu hình mà không cần sửa logic kiểm thử chung.
+
+## Kiểm thử phi chức năng
+
+Chạy hai script trong thư mục `NonFunctional/Quan/`:
+
+```powershell
+python NonFunctional/Quan/test_performance.py
+python NonFunctional/Quan/test_compatibility.py
+```
+
+Có thể thêm `--browser chrome` hoặc `--browser edge`; thêm `--headed` nếu muốn quan sát trình duyệt.
+
+### Performance Test
+
+Script `NonFunctional/Quan/test_performance.py` đo thời gian từ lúc bắt đầu điều hướng đến trang Add a new user đến khi trường Username hiển thị và nút Save có thể tương tác.
+
+- Đăng nhập được thực hiện trước khi đo, không tính vào thời gian kiểm thử.
+- Thực hiện một lần warm-up, không đưa vào kết quả.
+- Mặc định thực hiện 5 lần đo.
+- Sử dụng `time.perf_counter()` để đo thời gian.
+- Tiêu chí đạt:
+  - Median thời gian sẵn sàng của form không vượt quá 2,0 giây.
+  - Thời gian của lần chạy chậm nhất không vượt quá 5,0 giây.
+
+Kết quả được ghi tại `NonFunctional/Quan/performance_results.csv`.
+
+### Compatibility Test
+
+Script `NonFunctional/Quan/test_compatibility.py` kiểm tra form Add a new user trên ba kích thước viewport:
+
+| Thiết bị | Kích thước viewport |
+| :--- | :--- |
+| Desktop | 1440 × 1000 |
+| Tablet | 768 × 1024 |
+| Mobile | 390 × 844 |
+
+Các nội dung kiểm tra:
+- Trường Username, First name, Email và nút Save phải hiển thị.
+- Đo độ rộng thực tế của tài liệu bằng `document.documentElement.scrollWidth`.
+- Đo độ rộng viewport bằng `window.innerWidth`.
+- Tính độ tràn ngang: `max(0, documentWidth - viewportWidth)`.
+
+Tiêu chí đạt: độ tràn ngang không vượt quá 40px tại mỗi viewport.
+
+Kết quả được ghi tại `NonFunctional/Quan/compatibility_results.csv`, bao gồm kích thước màn hình, độ tràn ngang, trạng thái hiển thị control và trạng thái PASS/FAIL.
+
+## Kết quả kiểm chứng trên Moodle local
+
+Kết quả chạy kiểm thử bằng Chrome:
+
+| Hạng mục | Số lượng | Kết quả |
+| :--- | :--- | :--- |
+| Level 1 – Functional Testing | 25 test cases | 25/25 PASS |
+| Level 2 – Functional Testing | 25 test cases | 25/25 PASS |
+| Performance Testing | 1 test | PASS |
+| Compatibility Testing | 1 test | PASS |
+
+### Kết quả Performance
+
+Thực hiện 5 lần đo sau warm-up:
+
+| Lần chạy | Thời gian |
+| :--- | :--- |
+| 1 | 0,406 giây |
+| 2 | 0,409 giây |
+| 3 | 0,449 giây |
+| 4 | 0,348 giây |
+| 5 | 0,365 giây |
+| **Median** | **0,406 giây** |
+| **Maximum** | **0,449 giây** |
+
+**Kết quả:** PASS — Median 0,406 giây thấp hơn ngưỡng 2,0 giây và Maximum 0,449 giây thấp hơn ngưỡng 5,0 giây.
+
+### Kết quả Compatibility
+
+| Thiết bị | Viewport | Độ tràn ngang | Kết quả |
+| :--- | :--- | :--- | :--- |
+| Desktop | 1440 × 1000 | 0px | PASS |
+| Tablet | 768 × 1024 | 0px | PASS |
+| Mobile | 390 × 844 | 0px | PASS |
+
+**Kết quả:** PASS — Các control được kiểm tra đều hiển thị trên cả ba viewport và không phát hiện tràn ngang.
+
+## Các file kết quả
+
+Sau khi chạy kiểm thử, các file CSV được tạo tại:
+- `Level1/Quan/test_results.csv`
+- `Level2/Quan/test_results.csv`
+- `NonFunctional/Quan/performance_results.csv`
+- `NonFunctional/Quan/compatibility_results.csv`
+
+**Tổng kết:** Hai level kiểm thử chức năng đạt 50/50 test cases. Hai kiểm thử phi chức năng đều PASS theo các tiêu chí được cấu hình. Tổng cộng có 52 lần thực thi test thành công (50 test cases chức năng và 2 test methods phi chức năng).
